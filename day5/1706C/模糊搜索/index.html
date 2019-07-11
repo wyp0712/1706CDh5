@@ -9,17 +9,15 @@
 <body>
   
 
-  <script src="./ajax.js"></script>
+
+  
   <script>
-     
-     // 
-    ajax('./data.json', function(res) {
-       
-
+  
+    var arr = ['北京','h5','vue.js','node.js','react.js','wx'];
+    var filtArr = arr.filter((item, index) => {
+      return item.includes('s')
     })
-
-    // http://127.0.0.1:5500/day5/ajax/index.html
-
+    console.log(filtArr, 'filtArr')
   </script>
 
 </body>

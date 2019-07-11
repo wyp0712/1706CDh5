@@ -1,0 +1,97 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+html,body {
+  width: 100%;
+  height: 100%;
+}
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+%juzhong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  height: rem(45px);
+  background: lightcoral;
+  text-align: center;
+  line-height: rem(45px);
+  font-size: rem(25px);
+}
+
+.nav {
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  .left {
+    flex:8.5;
+    @extend %juzhong ;
+    position: relative;
+    .close {
+      display: block;
+      width: rem(30px);
+      height: rem(30px);
+      border-radius: 50%;
+      background: lightblue;
+      position: absolute;
+      right: 1%;
+      top: 13%;
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+    input {
+      width: 100%;
+      margin-left:2%;
+      height: 90%;
+      border:1px solid black;
+      font-size: rem(20px);
+    }  
+  }
+  .right {
+    flex:1.5;
+    @extend %juzhong;
+    font-size: rem(20px);
+  }
+}
+
+
+.main {
+  flex:1;
+  width: 100%;
+  overflow: auto;
+}
+
+.content {
+  width: 100%;
+  ul {
+    width: 100%;
+    li {
+      text-indent: 2em;
+      line-height: rem(35px);
+      font-size: rem(18px);
+      // background: #ccc;
+      border-bottom: 1px dashed black;
+    }
+  }
+}

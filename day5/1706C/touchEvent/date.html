@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    span {
+      width: 10%;
+      height: 35px;
+      background: #eee;
+      margin: 2%;
+      text-align: center;
+      line-height: 35px;
+    }
+
+    .active {
+      background: lightcoral;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+    <span>10</span>
+    <span>11</span>
+    <span>12</span>
+    <span>13</span>
+    <span>14</span>
+    <span>15</span>
+    <span>16</span>
+    <span>17</span>
+    <span>18</span>
+    <span>19</span>
+    <span>20</span>
+    <span>21</span>
+    <span>22</span>
+    <span>23</span>
+    <span>24</span>
+    <span>25</span>
+    <span>26</span>
+    <span>27</span>
+    <span>28</span>
+    <span>29</span>
+    <span>30</span>
+    <span>31</span>
+    <span>32</span>
+    <span>33</span>
+    <span>34</span>
+    <span>35</span>
+    <span>36</span>
+    <span>37</span>
+    <span>38</span>
+    <span>39</span>
+    <span>40</span>
+  </div>
+  <script>
+
+    var wrap = document.querySelector('.wrap');
+    var spans = document.querySelectorAll('span');
+      
+    this.ontouchstart = function(e) {
+      console.log(e.changedTouches)
+    }
+
+    // this.ontouchstart = function (e) {
+    //   if (e.target.nodeName === 'SPAN') {
+    //     var actives = document.querySelectorAll('.active')
+    //     console.log(actives.length)
+    //     if (actives.length < 2) {
+    //       e.target.classList.add('active');
+    //       return;
+    //     }
+    //     for (var i = 0; i < spans.length; i++) {
+    //       spans[i].classList.remove('active')
+    //     }
+    //   }
+    // }
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

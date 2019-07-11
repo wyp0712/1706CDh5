@@ -8,19 +8,19 @@
 </head>
 <body>
   
+  <a href="./city.html">选择城市</a>
 
-  <script src="./ajax.js"></script>
+
   <script>
-     
-     // 
-    ajax('./data.json', function(res) {
-       
+    var stroage = window.localStorage;
+    var aHome = document.querySelector('a');
 
-    })
+    if (stroage.cityname) {
+      aHome.innerHTML = stroage.cityname
+    }
 
-    // http://127.0.0.1:5500/day5/ajax/index.html
-
+  
+  
   </script>
-
 </body>
 </html>

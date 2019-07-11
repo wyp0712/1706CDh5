@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./js/flexible.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">猫眼模糊搜索</header>
+    <nav class="nav">
+      <div class="left">
+        <input type="text" class="inputDom">
+        <span class="close"></span>
+      </div>
+      <div class="right">取消</div>
+    </nav>
+
+    <div class="main">
+      <div class="content">
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="./js/ajax.js"></script>
+  <script>
+
+
+    var CatEye = function () {
+
+      this.inputDom = document.querySelector('.inputDom')
+      this.closeDom = document.querySelector('.close')
+      this.ulsDom = document.querySelector('.content ul')
+
+      this.stroage = window.localStorage;
+
+      this.movieArr = []
+      this.historyArr = []
+      this.init()
+    }
+
+    CatEye.prototype = {
+      init() {
+        this.getData()
+        this.fuzzySearch()
+        this.stroageEvent()
+        this.render()
+        this.removeDom()
+      },
+      getData() {
+        ajax('./mock/data.json', (movieData) => {
+          console.log(movieData.movieList, 'movieData')
+          this.movieArr = movieData.movieList
+        })
+      },
+      // 
+      stroageEvent() {
+        // 每次进入页面将历史记录拼接
+        if (this.stroage.movie) {
+          this.historyArr = JSON.parse(this.stroage.movie)
+        }
+
+        this.closeDom.onclick = () => {
+         //  点击close时候，将数据添加到本地存储中；
+         var inputVal = this.inputDom.value.trim()
+         this.historyArr.unshift(inputVal)  
+          
+         this.render()
+         this.inputDom.value = ''
+         this.closeDom.classList.remove('show');
+
+         //  将数据去重并且存入本地存储
+         this.stroage.setItem('movie', JSON.stringify(Array.from(new Set(this.historyArr)))) 
+        }
+      },
+      //  模糊搜索
+      fuzzySearch() {
+        this.inputDom.oninput = () => {
+          this.closeDom.classList.add('show')
+          var vals = this.inputDom.value.trim()
+          if (vals) {
+            let searchArr = this.movieArr.filter((item, index) => {
+              return item.nm.includes(vals)
+            })
+            this.render(searchArr)
+          } else {
+            this.ulsDom.innerHTML = ''
+            this.closeDom.classList.remove('show')
+          }
+        }
+      },
+      // 删除历史记录
+      removeDom() {
+        this.ulsDom.addEventListener('click', (e) => {
+           if(e.target.nodeName === 'LI') {
+             console.log(e.target, 'earget')
+             // 查找自定义属性
+             console.log(e.target.dataset.id)
+             var targetId = e.target.dataset.id;
+             // 通过数据去删除dom  
+            //  1. 取数据
+           this.historyArr = JSON.parse(this.stroage.getItem('movie'))
+            // console.log(getHistory, 'getHistory')
+            this.historyArr.splice(targetId, 1)
+            this.stroage.setItem('movie', JSON.stringify(this.historyArr))
+            this.render(this.historyArr)
+           }
+        })
+      },
+      render(data = this.historyArr) {
+        console.log(data, 'data----------1')
+        var brr = Array.from(new Set(data))
+        this.ulsDom.innerHTML = brr.map((item, index) => {
+          return `<li class=items data-id=${index}>${item.nm ? item.nm : item}</li>`
+        }).join('')
+      }
+    }
+
+    new CatEye()
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

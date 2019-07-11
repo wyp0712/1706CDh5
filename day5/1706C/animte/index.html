@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="./animate.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+      background: rgb(230, 78, 78);
+      position: relative;
+    }
+
+    .header {
+      width: 65px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(9, 71, 241, 0.863);
+      position: absolute;
+      left: 42%;
+      top: 10%;
+      box-shadow: inset 0 0 13px red;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!--  
+
+   animate.css
+
+   -->
+
+  <div class="wrap">
+
+    <div class="header animated bounceInDown"></div>
+
+  </div>
+
+  <script>
+     
+     var header = document.querySelector('.header');
+     setTimeout(function() {
+       header.classList.remove('bounceInDown')
+       header.classList.add('wobble')
+     }, 1000)
+
+  
+  
+  </script>
+
+</body>
+
+</html>

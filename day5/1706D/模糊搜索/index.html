@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+
+    var arr = ['vue.js', 'jquery.js', 'react.js', 'vue.js', 'vue.js']
+    var brr = arr.filter((item, index) => {
+      return item.includes('r')
+    })
+    // console.log(brr)
+
+
+    // Array.from() [...]
+    // 类数据 
+
+    // length  下标
+
+    // var obj = {
+    //   0: 'name',
+    //   1: 'devin',
+    //   2: 'age',
+    //   3: 'sex',
+    //   length: 4
+    // }
+
+    // console.log(Array.from(obj))
+
+    // for(var i = 0; i < obj.length; i ++) {
+    //      console.log(obj[i])
+    // }
+
+    // // 去重
+    // console.log(Array.from( new Set(arr) ))
+
+    // [vue, jquery]  vue
+    // var brr = []
+    // var flag = arr.map((item, index) => {
+    //    brr.indexOf(item) === -1 && brr.push(item)
+    //   //  console.log(brr, 'brr')
+    //    return brr
+    // }).join('')
+
+    // fileter  map  forEach reduce
+
+    var flag = arr.reduce((prev, item, index) => {
+      // console.log(prev, 'prev')
+      prev.indexOf(item) === -1 && prev.push(item)
+      return prev;
+    }, [])
+
+    console.log(flag)
+
+
+  </script>
+
+</body>
+
+</html>

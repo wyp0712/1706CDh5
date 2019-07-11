@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  
+    .box {
+      width: 300px;
+      height: 300px;
+      border:1px solid black;
+      margin: 100px auto;
+      transition: all 1s;
+      
+
+    }
+
+    .box:hover {
+      /* transform-origin: 0% 0%;
+      transform: rotate(45deg) */
+    }
+    .border {
+      display:block;
+      width: 142%;
+      height: 1px;;
+      background: red;
+      transform-origin:0 0; 
+      transform: rotate(45deg);
+
+    }
+
+    .border1 {
+      display:block;
+      width: 100%;
+      height: 1px;;
+      background: red;
+      transform-origin:71% -40%;
+      transform: rotate(-45deg);
+    }
+
+    .box {
+      background: url('../../img/banner.jpg') no-repeat;
+      background-size: cover;;
+    }
+  </style>
+  <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+
+  <!-- bounceInDown bounceInUp BounceInLeft BounceInRight -->
+  <div class="box animated bounceInDown wobble">
+     <span class="border "></span>
+     <!-- <span class="border1"></span> -->
+  </div>
+
+  <script>
+    
+    var box = document.querySelector('.box');
+
+    setTimeout(function() {
+      box.classList.remove('bounceInDown')
+      box.classList.add('wobble')
+    }, 1000)
+  
+  
+  </script>
+
+
+</body>
+</html>

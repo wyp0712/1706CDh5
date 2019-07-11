@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+   
+  账号：<input type="text" class="user"> <br>
+  密码：<input type="password" class="pwd"> <br>
+
+  <button id="btn">提交</button>
+
+  <script>
+    
+    var user = document.querySelector('.user')
+    var pwd = document.querySelector('.pwd')
+    var btn = document.querySelector('#btn')
+
+    var stroage = window.localStorage;
+    
+    if (stroage.msg) {
+      msgObj = JSON.parse(stroage.msg)
+      console.log(msgObj)
+      user.value = msgObj.user;
+      pwd.value = msgObj.pwd;
+    }
+
+    btn.onclick = function() {
+       var msg = {
+         user: user.value.trim(),
+         pwd: pwd.value.trim()
+       }
+       stroage.msg = JSON.stringify(msg)
+    }
+
+  
+  
+  </script>
+</body>
+</html>
