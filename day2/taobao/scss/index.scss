@@ -1,0 +1,144 @@
+@import './reset.scss';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+%juzhong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@function toRem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+.header {
+  width: 100%;
+  height: toRem(37px);
+  background: #EF8B42;
+  display: flex;
+
+  .iconfont  {
+    font-size: 70px;
+    color: #fff;
+  }
+
+  .header-left {
+    flex: 2;
+    @extend %juzhong;
+    img {
+      width: 51%;
+      height: 89%;
+    }
+  }
+
+  .header-right {
+    flex: 8;
+    @extend %juzhong;
+    .header-right-input {
+      width: 85%;
+    height: 72%;
+    border-radius: 4px;
+    background: #FF4E22;
+    position: relative;
+    .input-tip {
+      position: absolute;
+      left: 10%;
+      width: 80%;
+      height: 30px;
+      text-align: center;
+      line-height: 51px;
+      color: #fff;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      background: #FF4E22;
+      border: none;
+      border-radius: 10px;
+      padding-left: 3%;
+    }
+    
+    
+    }
+  }
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+}
+
+.swiper-container {
+  width: 100%;
+  height: toRem(150px);
+  .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// icon
+.icon-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; // 换行
+
+  .icon-box-item {
+    @extend %juzhong;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      @extend %juzhong;
+
+      &:nth-child(1) {
+        width: toRem(70px);
+        height: toRem(55px);
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &:nth-child(2) {
+        @extend %juzhong;
+        width: 100%;
+        font-size: toRem(15px);
+        height: toRem(20px);
+      }
+    }
+  }
+}
+
+
+
+.footer {
+  width: 100%;
+  height: toRem(37px);
+  background: #EF8B42;
+}

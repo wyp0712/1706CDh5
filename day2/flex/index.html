@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <link rel="stylesheet" href="./scss/index.css">
+
+  <link rel="stylesheet" href="./libs/swiper.css">
+
+  <script src="./libs/flexible.js"></script>
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <header class="header">
+      <div class="left">
+        <span class="iconfont icon-Member"></span>
+        <span>签到</span>
+      </div>
+      <div class="right">
+        <div class="right-input">
+          <span class="iconfont icon-fangdajing"></span>
+          <input type="text">
+        </div>
+      </div>
+    </header>
+
+
+
+
+    <main class="main">
+
+      <!-- canrousel -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./img/屏幕快照 2019-07-08 下午2.48.40.png" alt="">
+          </div>
+          <div class="swiper-slide">
+            <img src="./img/屏幕快照 2019-07-08 下午2.48.40.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!-- icon -->
+      <div class="block">
+
+      </div>
+      <div class="block">
+
+      </div>
+
+      <nav class="nav">
+        <span>tab1</span>
+        <span>tab1</span>
+        <span>tab1</span>
+      </nav>
+      <div class="block">
+
+      </div>
+      <div class="block">
+
+      </div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+
+
+
+
+    </main>
+
+    <div class="back"></div>
+
+    <footer class="footer">
+      <ul>
+        <li class="iconfont icon-fangdajing
+        "></li>
+        <li>首页</li>
+      </ul>
+      <ul>
+        <li class="iconfont icon-Member"></li>
+        <li>首页</li>
+      </ul>
+      <ul>
+        <li class="iconfont icon-My"></li>
+        <li>首页</li>
+      </ul>
+      <ul>
+        <li class="iconfont icon-shouye"></li>
+        <li>首页</li>
+      </ul>
+      <ul>
+        <li class="iconfont icon-shouye"></li>
+        <li>首页</li>
+      </ul>
+    </footer>
+
+  </div>
+
+
+  <script src="./libs/swiper.js"></script>
+  <script>
+
+    new Swiper(".swiper-container", {})
+    var back = document.querySelector('.back')
+    var main = document.querySelector('.main')
+    back.onclick = function () {
+      main.scrollTop = 0;
+    }
+
+
+    // var navDom = document.querySelector('.nav')
+    // var header = document.querySelector('.header')
+    // // this 
+    // main.addEventListener('scroll', function() {
+    //   // console.log(navDom.offsetTop)  
+    //   if (this.scrollTop > navDom.offsetTop - header.offsetHeight) {
+    //     navDom.classList.add('fixed')
+    //   } else {
+    //     navDom.classList.remove('fixed')
+    //   }
+    // })
+
+
+
+
+  </script>
+
+</body>
+
+</html>

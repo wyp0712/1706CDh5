@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      margin: 50px auto;
+      background: red;
+      animation: boxStyle 1s linear infinite;
+    }
+
+    .pause {
+      /* runing 运行  paused 动画暂停 */
+      animation-play-state: paused; 
+    }
+    @keyframes boxStyle {
+      0% {}
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .box2 {
+      width: 200px;
+      height: 200px;
+      background: lightcoral;
+      transition: all 1s;
+    }
+    .box2:hover {
+      /* transform: translate(100px, 100px)  */
+      /* transform: rotate() */
+      /* transform: scale(3); */
+      transform: skew(45deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box2">
+
+  </div>
+
+
+  <audio id="audio" src="./马良 - 往后余生 (Demo).mp3"></audio>
+
+  <div class="box pause"></div>
+
+  <script>
+
+    var audio = document.querySelector('#audio');
+    var box = document.querySelector('.box');
+    var flag = true;
+    box.onclick = function () {
+      if (flag) {
+        this.classList.remove('pause')
+        audio.play()
+      } else {
+        this.classList.add('pause')
+        audio.pause()
+      }
+      flag = !flag;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

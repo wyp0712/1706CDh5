@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+  <button id="remove">remove</button>
+    
+  <button id="clear">clear</button>
+
+  <script>
+
+
+    var stroage = window.localStorage;  // {}
+
+
+    // 
+
+    var obj = {
+      name: 1,
+      age:2,
+      sex:0
+    }
+
+    stroage.setItem('msg', JSON.stringify(obj))
+
+    console.log( JSON.parse(stroage.msg))
+    
+    //  console.log(stroage, 'stroage')
+    //  stroage.setItem('name', '123')
+    //  stroage.setItem('age', '12')
+    //  stroage.setItem('sex', '0')
+
+
+    //  stroage.name = 'devin'
+    //  stroage.age = 'devin'
+    //  stroage.sex = 'devin'
+
+
+    //  console.log(stroage.name)
+    //  console.log(stroage.age)
+    //  console.log(stroage.sex)
+
+    //  console.log( stroage.getItem('name') )
+    //  console.log( stroage.getItem('age') )
+    //  console.log( stroage.getItem('sex') )
+
+     remove.onclick = function() {
+      stroage.removeItem('name')
+     }
+     clear.onclick = function() {
+      stroage.clear()
+     }
+    //  删除
+
+
+    
+    // bom  dom 
+
+
+    // var obj = {
+
+    // } 
+    // obj.name = 'devin';
+    // obj.age = '342';
+    // obj.sex = 0;
+
+    // console.log(obj.name)
+    // console.log(obj.age)
+
+
+  
+  
+  
+  </script>
+
+
+</body>
+</html>

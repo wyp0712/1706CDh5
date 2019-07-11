@@ -1,0 +1,206 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
+}
+
+
+html,body {
+  width: 100%;
+  height: 100%;
+}
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem; // 375 iphone 678
+}
+
+%juzhong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  // background: #eee;
+  .left {
+    flex:2;
+     display: flex;
+     flex-direction: column;
+
+     .iconfont {
+      font-size: 50px;
+
+
+     }
+    span {
+      @extend %juzhong;
+      &:nth-child(1) {
+       flex:8;
+      }
+      &:nth-child(2) {
+       flex:2;
+       font-size: 20px;
+      }
+    }
+
+  }
+  .right {
+    flex:8;
+    @extend %juzhong;
+    position: relative;
+    .iconfont {
+      position: absolute;
+      left: 10%;
+      font-size: 30px;
+    }
+    .right-input {
+      width: 100%;
+      height: 90%;
+      @extend %juzhong;
+      input {
+        width: 90%;
+        height: 90%;
+        border-radius: 21px;
+        border: none;
+        @extend %juzhong;
+        background: #efefef;
+      }
+    }
+
+  }
+  
+}
+
+.main {
+  flex:1;
+  width: 100%;
+  overflow: auto;
+  scroll-behavior: smooth; // 谁有滚动条加给谁
+}
+
+.nav {
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  background: #eee;
+  position: sticky;
+  position: -webkit-sticky;
+  left:0;
+  top:0;
+  span {
+    flex:1;
+    @extend %juzhong;
+  }
+}
+
+// .fixed {
+//   position: fixed;
+//   left:0;
+//   top:rem(40px);
+// }
+
+.back {
+  width: rem(50px);
+  height: rem(50px);
+  border-radius: 50%;
+  background: lightcoral;
+  text-align: center;
+  line-height: rem(50px);
+  position: fixed;
+  right: 10%;
+  bottom:10%;
+}
+
+// canrousel
+.swiper-container {
+  width: 100%;
+  height: rem(150px);
+  .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+// icon-box
+.icon-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 20%;
+    @extend %juzhong;
+    flex-direction: column;
+    li{
+      &:nth-child(1) {
+        width: rem(60px);
+        height: rem(60px);
+        border-radius: 50%;
+        background: url('../img/icon1.png') no-repeat;
+        background-size: contain;
+        @extend %juzhong;
+      }
+      &:nth-child(2) {
+        width: 100%;
+        height: rem(20px);
+        font-size: rem(15px);
+        @extend %juzhong;
+      }
+    }
+  }
+}
+
+.block {
+  width: 90%;
+  margin: 0 auto;
+  height: rem(150px);
+  background: lightblue;
+  margin-bottom: 10px;
+}
+
+.footer {
+  width: 100%;
+  height: rem(40px);
+  
+  display: flex;
+
+  ul {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    li:nth-child(1) {
+     flex:8;
+     @extend %juzhong;
+    }
+    .iconfont {
+      font-size: 30px;
+    }
+    li:nth-child(2) {
+      flex:2;
+      @extend %juzhong;
+      font-size: 25px;
+    } 
+  }
+}

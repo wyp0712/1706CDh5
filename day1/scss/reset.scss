@@ -1,0 +1,11 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  appearance: none;
+  user-select: none; // 禁止用户选中文字；
+  text-size-adjust: 100%; // 手机横屏的字体适应
+}

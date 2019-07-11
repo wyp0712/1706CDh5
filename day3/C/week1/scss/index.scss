@@ -1,0 +1,186 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+@mixin setTopBorder($color:#ccc) {
+  & {
+    position: relative;
+  }
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left:0;
+    top:0;
+    background: $color;
+    transform: scaleY(0.5);
+  }
+}
+@mixin setBottomBorder($color) {
+  & {
+    position: relative;
+  }
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    left:0;
+    bottom:0;
+    background: $color;
+    transform: scaleY(0.5);
+  }
+}
+
+
+%juzhong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+html,body {
+  width:100%;
+  height: 100%;;
+}
+
+
+.wrap {
+  width:100%;
+  height: 100%;;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  padding: 3%;
+  height: rem(45px);
+  // background: lightblue;
+  display: flex;
+  justify-content: space-between;
+  @include setBottomBorder(red);
+  @extend %juzhong;
+  .left {
+    @extend %juzhong;
+  }
+  .right{
+    width: rem(100px);
+    height: rem(35px);
+    border:1px solid #ccc;
+    border-radius: 60px;
+    @extend %juzhong;
+  }
+}
+
+.main {
+  flex:1;
+  width: 100%;
+  overflow: auto;
+}
+
+
+// 轮播图
+.swiper-box {
+  width: 100%;
+  height: rem(150px);
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+      .swiper-slide {
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.icon-box {
+  width: 100%;
+  display: flex;
+  ul {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    li:nth-child(1) {
+      flex:8;
+      @extend %juzhong;
+    }
+    li:nth-child(2) {
+      flex:2;
+      @extend %juzhong;
+    }
+  }
+}
+
+// hot-ideas
+.hot-ideas {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  @extend %juzhong;
+  .hot-item {
+    margin: 2%;
+    width: 40%;
+    height: rem(110px);
+    border:1px solid #ccc;
+    border-radius: 10px;
+    @extend %juzhong;
+    flex-direction: column;
+    h1 {
+      width: 90%;
+      height: 30%;
+      @extend %juzhong;
+      font-size: rem(17px);
+    }
+    span {
+      width: 90%;
+      height: 30%;
+      background: blue;
+      color: #fff;
+      @extend %juzhong;
+    }
+  }
+}
+
+
+.footer {
+  width: 100%;
+  height: rem(45px);
+ @include setTopBorder(red);
+  ul {
+    display: flex;
+    flex-direction: column;
+     li:nth-child(1){
+       flex:8;
+       @extend %juzhong;
+       img {
+         width: 80%;
+         height: 80%;
+       }
+     }
+     li:nth-child(2){
+       flex:2;
+       @extend %juzhong;
+    }
+  }
+}
+

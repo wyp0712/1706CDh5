@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      width: 100%;
+      display: flex;
+      position: relative;
+    }
+
+    .wrap .tab {
+      flex: 1;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .border {
+      width: 33.3%;
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: all 1s;
+    }
+
+    .border::before {
+      content: "";
+      display: block;
+      width: 25%;
+      text-align: center;
+      height: 1px;
+      background: red;
+      position: absolute;
+      left: 36%;
+      bottom: 0;
+    }
+
+    .container {
+      width: 400px;
+      height: 400px;
+      /* border:1px solid black; */
+      margin: 150px auto;
+      position: relative;
+    }
+
+    .box {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      /* border:1px solid black; */
+      margin: 50px 45px;
+      transform: rotate(45deg);
+      animation: boxStyle 2s linear infinite;
+    }
+
+    .box::before {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border:1px solid black;
+      position: absolute;
+    }
+
+    .box:nth-child(2) {
+      animation-delay: 200ms;
+    }
+
+    .box:nth-child(2)::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: lightblue;
+      border-radius: 50%;
+      border:1px solid black;
+      position: absolute;
+
+    }
+
+    .box:nth-child(3) {
+      animation-delay: 300ms;
+    }
+    .box:nth-child(3)::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: rgb(178, 230, 173);
+      border-radius: 50%;
+      border:1px solid black;
+      position: absolute;
+      /* top:10px; */
+
+    }
+ 
+
+    @keyframes boxStyle {
+      0% {
+
+      }
+      
+      20% {
+        transform: rotate(45deg);
+      } 
+
+      100% {
+        transform: rotate(405deg);
+      }
+    }
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+  </div>
+
+
+
+  <!-- <div class="wrap">
+    <div class="tab">tab1</div>
+    <div class="tab">tab2</div>
+    <div class="tab">tab3</div>
+
+    <div class="border"></div>
+  </div> -->
+
+
+  <script>
+
+    const tabs = document.querySelectorAll('.tab')
+    const border = document.querySelector('.border')
+    tabs.forEach((item, index) => {
+      item.onclick = function () {
+        border.style.left = `${index * 125}px`;
+      }
+    })
+
+
+
+  </script>
+
+</body>
+
+</html>

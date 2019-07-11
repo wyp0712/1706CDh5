@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+   .box{
+
+     transition: all 1s linear 0s;
+   }
+
+   .box1 { 
+
+     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+     animation: circle 2s linear 0s infinite alternate backwards;
+     
+     /* animation-play-state: paused running */
+   }
+
+   .box3 {
+     /* transform: translate() scale() skew() rotate(); */
+
+   }
+
+   .process{
+     width: 0px;
+     height: 45px;
+     background: red;
+   }
+  </style>
+</head>
+<body>
+  
+  <div class="process">
+
+  </div>
+
+  <script>
+       
+     var pro = document.querySelector('.process');
+    var count = 0;
+    var timer = null;
+     timer = setInterval(function() {
+      count++;
+      pro.style.width = count + 'px'
+      console.log(timer)
+      if (count >= 100) {
+        clearInterval(timer)
+      }
+     }, 10)  
+
+    var id = null;
+    function animte() {
+      count++;
+      pro.style.width = count + 'px'
+      id = requestAnimationFrame(animte)
+      if (count >=100) {
+        cancelAnimationFrame(id)
+      }
+    }
+
+    requestAnimationFrame(animte)
+
+
+
+
+    
+  
+  </script>
+
+
+</body>
+</html>

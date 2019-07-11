@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .pro {
+    width: 0;
+    height: 35px;
+    background: red;
+  }
+  </style>
+</head>
+<body>
+  
+  
+  <div class="pro"></div>
+
+
+  <script>
+    
+    var pro = document.querySelector('.pro')
+    var count = 0;
+    var timer = null;
+    
+    // timer = setInterval(function(){
+    //   count++;
+    //   pro.style.width = count + 'px'
+
+    //   if (count >=100) {
+    //     clearInterval(timer)
+    //   }
+    // },10)
+
+
+    function animte() {
+      count++;
+      pro.style.width = count + 'px'
+      timer = requestAnimationFrame(animte)
+      if (count >=100){
+       cancelAnimationFrame(timer)
+      } 
+    }
+    requestAnimationFrame(animte)
+  
+  
+  </script>
+
+</body>
+</html>

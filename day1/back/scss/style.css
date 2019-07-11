@@ -1,0 +1,124 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*
+  嵌套： 一般不超过3层
+*/
+.box {
+  width: 100px;
+  height: 100px;
+}
+
+p {
+  color: red;
+}
+
+p span {
+  height: 50px;
+}
+
+/*
+变量
+*/
+.box1 {
+  width: 100px;
+}
+
+/* 
+ 继承：  混合宏   1. 不传参数   2.传参（默认变量）
+*/
+.box2 {
+  width: 100px;
+  color: red;
+}
+
+/* 
+  占位继承：
+*/
+.box3 {
+  text-align: center;
+  line-height: 45px;
+}
+
+/*
+  
+  函数：
+
+*/
+.box4 {
+  font-size: 80px;
+}
+
+/* 
+  
+
+ 媒体查询：
+
+*/
+@media screen and (min-width: 480px) {
+  .box5 {
+    width: 500px;
+    height: 300px;
+  }
+  .box5 span {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: red;
+  }
+}
+
+/*
+  
+ 要求： 
+  1. pc  四块横排
+  2. 手机： 竖着排
+
+*/
+@media screen and (max-width: 680px) {
+  .box6 {
+    width: 100%;
+  }
+  .box6 div {
+    width: 100%;
+    height: 45px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 45px;
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  .box6 {
+    width: 100%;
+  }
+  .box6 div {
+    width: 25%;
+    float: left;
+    height: 45px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 45px;
+    font-size: 30px;
+  }
+}
+
+/* 
+ 
+  div: 
+  
+    float 布局：
+
+    父元素高度塌陷： overflow:hidden:   高度：  
+
+    定位布局：  
+      
+    position: 
+
+    弹性盒布局：
+*/

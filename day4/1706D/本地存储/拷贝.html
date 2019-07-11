@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <script>
+
+    //  var obj = 1;
+    //  var a = obj;
+
+
+    var obj = {
+      name: 'devin',
+      age:1
+    }
+    obj.age = '12'
+    var obj1 = obj;
+    console.log(obj1)
+
+    var a = JSON.parse(JSON.stringify(obj))
+     console.log(a, 'a')
+     a.age = 14;
+     console.log(a, '更改后的a')
+     console.log(obj, 'obj232')
+    //  Object.assign()
+    var a = {
+      name : '1',
+
+    }
+    var b = {
+      age: 2
+    }
+
+    var opt = Object.assign(a, b)
+    console.log(opt, 'opt')
+
+
+
+
+  
+  
+  </script>
+  
+</body>
+</html>

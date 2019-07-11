@@ -1,0 +1,129 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  appearance: none;
+  user-select: none;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+
+  fu:
+
+    display: flex;
+    flex-di
+    just
+    ali
+    flex-wrap: wrap;
+
+  zi:
+    flex:1  
+
+  水平放向：
+     space-between 没有padding  
+     space-around  有padding  
+     center;
+     flex-start;
+     flex-end:
+
+  justify-content: ; 
+
+*/
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  height: 45px;
+  background: red;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2%;
+  padding-right: 2%;
+  align-items: center;
+}
+
+.header span {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+}
+
+.swiper-container {
+  width: 90%;
+  overflow-x: scroll;
+  height: 150px;
+  margin: 0 auto;
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+
+.swiper-container .swiper-wrapper {
+  width: 300%;
+  height: 100%;
+}
+
+.swiper-container .swiper-wrapper .swiper-slide {
+  width: 33.3%;
+  height: 100%;
+  float: left;
+  border: 1px dashed blue;
+}
+
+.icon-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon-box ul {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-box ul li:nth-child(1) {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.icon-box ul li:nth-child(2) {
+  width: 100%;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.footer {
+  width: 100%;
+  height: 45px;
+  background: red;
+}

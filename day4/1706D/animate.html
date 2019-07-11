@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./font_8glfvvbw3qe/iconfont.css">
+  <title>Document</title>
+  <style>
+    /* 过渡动画  触发动画*/
+    .box {
+      width: 100px;
+      height: 100px;
+      background: red;
+      transition: width 1s;
+
+      /* 动画性质 width  */
+      /* transition-property: all; */
+      /* 动画时间 */
+      /* transition-duration: 1s; */
+      /* 动画轨迹函数 ease  linear */
+      /* transition-timing-function: linear; */
+      /* 动画延迟时间  规定动画从何时开始 */
+      /* transition-delay: 0s;  */
+    }    
+
+    .box:hover {
+      width: 200px;
+      height: 200px;
+    }
+
+
+
+
+
+    /* 自执行动画 */
+
+
+    .box1 {
+      margin:150px auto;
+      width: 100px;
+      height: 100px;
+      background: lightcoral;
+      /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+      /* animation: boxStyle 1s infinite; */
+
+      /* 动画名称 */
+      animation-name: boxStyle;
+      /* 动画时长 */
+      animation-duration: 1s;
+      /* 动画轨迹 */
+      animation-timing-function: ease;
+      /* 动画延迟时间  固定动画开始时间 */
+      animation-delay: 0s;
+      /* 动画次数  infinite 无限次数  */
+      animation-iteration-count: 1;
+      /* 动画方向  alternate 往复运动 */
+      animation-direction: alternate;
+      /* 规定动画 结束 时候的状态  backwards 停留在开始位置 forwards */
+      animation-fill-mode: forwards;
+
+
+      /* 单独的属性 动画运动状态  paused running */
+      /* animation-play-state: paused; */
+    }
+
+    @keyframes boxStyle {
+     0% {
+
+     }
+     20% {
+
+     }
+     100% {
+
+     }
+    }
+
+
+    /* 变形： */
+
+    .box2 {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 150px auto;
+      background: lightgreen;
+      font-size: 100px;
+      text-align: center;
+      line-height: 200px;
+      /* 旋转角度  deg */
+
+      /* 倾斜度 */
+      /* transform: skew(45deg); */
+      /* 位移 */
+      /* transform:translate(100px, 100px); */
+      /* 缩放  */
+      /* transform: scale(2); */
+      animation: circle 1s linear infinite;
+    }
+
+    @keyframes circle {
+      0% {
+
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .paused {
+      animation-play-state: paused;
+    }
+
+
+    .box3 {
+      width: 300px;
+      height: 300px;
+      background: red;
+      text-align: center;
+      line-height: 300px;
+      font-size: 40px;
+      /* transform: rotateY(45deg) */
+      backface-visibility: hidden;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+<!-- 
+  <div class="box"></div>
+  <div class="box1"></div> -->
+  <!-- <div class="box2 paused iconfont ">
+      &#xe613;
+  </div> -->
+
+  <div class="box3"> hello wrold</div>
+
+  <audio id="audio" src="./马良 - 往后余生 (Demo).mp3"></audio>
+
+
+  <button id="btn">点击反转</button>
+  <script>
+   
+   var box2 = document.querySelector('.box2');
+   var box3 = document.querySelector('.box3');
+   var audio = document.querySelector('#audio');
+   var flag = true;
+  //  box2.onclick = function() {
+  //    if (flag) {
+  //     box2.classList.remove('paused')
+  //     audio.play()
+  //    } else {
+  //     box2.classList.add('paused')
+  //     audio.pause()
+  //    }
+  //    flag  = !flag;
+  //  }
+
+   
+   var count = 0;
+   btn.onclick = function() {
+     count+= 10;
+     box3.style.transform = `rotateY(${count}deg)`
+   }
+  
+  </script>
+  
+
+
+
+
+</body>
+</html>

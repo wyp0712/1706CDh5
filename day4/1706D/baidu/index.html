@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <link rel="stylesheet" href="./baidu.css">
+  <script src="../../../libs/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+
+    <span id="btn">点击展开</span>
+    <main class="main">
+      <div class="dialog">
+        <div class="mask"></div>
+        <div class="tip">
+          <span class="tip-btn">点击收起</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+  <script>
+    
+    var btn  = document.querySelector('#btn');
+    var dialog  = document.querySelector('.dialog');
+    var mask  = document.querySelector('.mask');
+    var tip  = document.querySelector('.tip');
+    var tipBtn  = document.querySelector('.tip-btn');
+
+
+    btn.onclick = function() {
+      dialog.style.display = 'block'
+      tip.style.left = '0'
+    }
+
+    tipBtn.onclick = function() {
+      tip.style.left = '-70%';
+
+       setTimeout(function() {
+         dialog.style.display = "none"
+       }, 300)
+    }
+
+
+
+  
+  
+  </script>
+</body>
+
+</html>

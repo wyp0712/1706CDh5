@@ -1,0 +1,89 @@
+@import './reset.scss'; // 必须有分号
+// scss css预编译器；将scss语法编辑的代码编译成css代码
+
+/*
+ *m1. 变量
+ *2. 嵌套
+ *3. 继承
+  4. 循环
+  5. 引入 @import './reset.scss';
+ *6. 函数
+*/
+
+
+/*
+ 6. 函数
+*/
+
+@function twoPx($font) {
+  @return $font * 2
+};
+
+
+// 变量：
+$width: 100px;
+$h: 200px;
+
+// 嵌套
+h1 {
+  font-size: twoPx(14px);
+
+  .box {
+    height: $h;
+    width: $width;
+  }
+}
+
+// 继承：1. 混合宏继承 2. 占位继承
+
+// 1. 混合宏继承  语法： @mixin 名字() { } 使用：  @include 名字(100px);
+// 1> 不传参数  2>传入参数  3>传参且有默认值
+
+@mixin width($w:100px, $color:red) { // 继承
+  width: $w * 2;
+  background: $color;
+}
+@mixin bg($color:red) { // 继承
+  background: $color;
+}
+
+.box-utem { // 使用继承
+ @include width(100px,#ccc);
+}
+
+// 2. 占位继承
+
+%juzhong {
+  text-align: center;
+  line-height: 45px;
+}
+
+.flex {
+  display: flex;
+}
+
+.box2 {
+  @extend .flex;
+  @extend %juzhong;
+}
+.box3 {
+  @extend %juzhong;
+}
+
+/*
+ 循环   
+*/
+
+@for $i from 1 to 5 {
+  .item-#{$i} {
+    width: $i * 50px;
+  }
+}
+
+@for $i from 1 through 5 {
+  .list-#{$i} {
+    width: $i * 50px;
+  }
+}
+
+

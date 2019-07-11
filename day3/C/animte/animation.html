@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+   .box{
+     margin:200px;
+     width:200px;
+     height: 200px;
+     background:red;
+     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+     /* animation: boxStyle 1s linear 0s infinite alternate backwards; */
+     animation: boxStyle 1s infinite;
+   }
+
+   @keyframes boxStyle {
+     /* 0% */
+     from { 
+     }
+     /* 100% */
+     to {
+      border-radius: 50%;
+     }
+   }
+   
+   /* 过渡动画 触发动画 */
+
+   /* 自执行动画 */
+
+   /* 变形 */
+
+   .box1 {
+    /* 位移 */
+    transform: translate3d(200px, 100px, 0);
+    /* 缩放  */
+    transform: scale(2, 2);
+    /* 斜切 */
+    transform: skew(45deg);
+    /* 旋转 */
+    transform: rotate3d(45deg);
+   }
+
+   
+
+  </style>
+</head>
+<body>
+  
+  
+  <div class="box"></div>
+
+
+</body>
+</html>

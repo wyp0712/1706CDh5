@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <button id="remove">remove</button>
+  <button id="clear">clear</button>
+
+  <script>
+    // js 本地 存储：  同源下访问
+    // 存储字符串
+    var stroage = window.localStorage;  
+    window.sessionStorage
+
+
+
+   console.log(decodeURI('%E7%8C%AB%E7%9C%BC'))
+
+    var obj = {
+      name: 13,
+      age: 88,
+      sex: 0
+    }
+
+    // 存 取 删除 清除
+    // key : value
+    // stroage.setItem('name', '12')
+    // stroage.setItem('age', 124)
+    // stroage.setItem('flag', true)
+    // stroage.setItem('flags', undefined)
+    // stroage.setItem('msg', JSON.stringify(obj))
+
+
+    stroage.name = '123132'
+    console.log(stroage.name, 'name---------1')
+
+    // 取
+    console.log(JSON.parse(stroage.getItem('msg')), 'msg')
+    console.log(stroage.getItem('name'), 'name')
+    console.log(stroage.getItem('age'), 'age')
+
+
+    remove.onclick = function () {
+      stroage.removeItem('age')
+    }
+
+    clear.onclick = function () {
+      stroage.clear()
+    }
+
+
+
+
+
+
+
+
+
+
+    console.log(stroage, 'stroage')
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

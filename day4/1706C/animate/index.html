@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000000;
+    }
+
+    .wrap {
+      width: 400px;
+      height: 400px;
+      margin: 150px auto;
+      /* border: 1px solid black; */
+      position: relative;
+    }
+
+    .box {
+      width: 300px;
+      height: 300px;
+      /* border: 1px solid black; */
+      transform: rotate(45deg);
+      position: absolute;
+      left: 12%;
+      top: 14%;
+      animation: boxStyle 2s infinite;
+    }
+
+    .box:nth-child(1) {
+      z-index: 5;
+    }
+
+    @keyframes boxStyle {
+      0% {}
+
+      20% {
+        transform: rotate(45deg);
+      }
+
+      100% {
+        transform: rotate(405deg);
+      }
+    }
+
+    .box::before {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: lightcoral;
+    }
+
+    .box:nth-child(2) {
+      animation-delay: 200ms;
+      /* position: relative; */
+
+    }
+
+    .box:nth-child(2)::before {
+      left: 10px;
+      content: "";
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgb(98, 18, 226);
+      position: absolute;
+      top: 4px;
+
+    }
+
+    .box:nth-child(3) {
+      animation-delay: 400ms;
+      /* position: relative; */
+    }
+
+    .box:nth-child(3)::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgb(4, 224, 122);
+      position: absolute;
+      top: 5px;
+      left:10px;
+    }
+
+    .box:nth-child(4) {
+      animation-delay: 500ms;
+      /* position: relative; */
+    }
+
+    .box:nth-child(4)::before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgb(226, 112, 18);
+      position: absolute;
+      top: 5px;
+      left:10px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="wrap">
+
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+
+
+  </div>
+
+
+</body>
+
+</html>

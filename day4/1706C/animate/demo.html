@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./font_a37n550y327/iconfont.css">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      /* border:1px solid black; */
+      text-align: center;
+      font-size: 30px;
+      line-height: 50px;
+      animation: circle 1s linear infinite;
+    }
+
+    @keyframes circle {
+      0% {}
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .box1 {
+      width: 300px;
+      height: 300px;
+      background: red;
+      text-align: center;
+      line-height: 300px;
+      font-size: 50px;
+
+      /* 反转之后隐藏不可见 */
+      backface-visibility: hidden;
+      /* transform: rotateY(50deg) */
+      
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="box iconfont">
+    &#xe627;
+  </div>
+
+
+  <div class="box1">
+    hello world
+  </div>
+
+  <button id="btn">点击反转</button>
+
+
+  <script>
+
+    var box1 = document.querySelector('.box1');
+
+    var count = 0;
+    btn.onclick = function () {
+      count += 10;
+      box1.style.transform = `rotateY(${count}deg)`;
+    }
+
+
+  </script>
+
+</body>
+
+</html>

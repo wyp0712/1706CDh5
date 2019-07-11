@@ -1,0 +1,90 @@
+/*
+ .scss  .less  css 编译器     easy sass
+*/
+
+/* 引入  必须加分号*/
+
+@import './reset.scss';
+
+/*
+ 嵌套： 
+ 一般不超过三层
+*/
+
+.wrap {
+  width: 100px;
+}
+.box {
+  color: red;
+  span {
+    display: block;
+    width: 50px;
+    a {
+      text-align: center;
+    }
+  }
+}
+
+/* 
+ 变量
+*/ 
+
+$width: 100px;
+$bg: red;
+$fontSize: 30px;
+.box {
+  width: $width;
+  background: $bg;
+  font-size: $fontSize;
+}
+
+/* 
+  
+继承：
+1. 混合宏继承：
+2. 占位继承：
+*/
+
+/*
+  1. 混合宏继承：
+   
+  传参数
+  不穿参数（默认值）
+
+*/
+
+@mixin width($w:10px, $h: 30px) {
+  width: $w;
+  height: $h;
+}
+
+.box2 {
+  @include width;
+}
+
+
+/*
+  2. 占位继承：
+*/
+
+%juzhong {
+  text-align: center;
+  line-height: 40px;
+}
+
+.box3 {
+  @extend %juzhong;
+}
+
+/*
+  函数：
+*/
+
+@function toRem($font:20px) {
+  @return $font * 2;
+}
+
+.box4 {
+  font-size: toRem(30px);
+}
+

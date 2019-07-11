@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .wrap {
+      /* font-size: 0; */
+    }
+
+    .box {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: black;
+      display: inline-block;
+      animation: scaleBox 1s linear infinite alternate;
+    }
+
+    @keyframes scaleBox {
+      0% {
+        transform: scale(1)
+      }
+
+      100% {
+        transform: scale(0.5)
+      }
+    }
+
+    .box:nth-child(1) {}
+
+    .box:nth-child(2) {
+      animation-delay: 200ms;
+    }
+
+    .box:nth-child(3) {
+      animation-delay: 400ms;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+
+
+  <script>
+
+
+    function red(green) {
+      console.log('red', 'red')
+      setTimeout(function () {
+      
+        green && green('green', yellow)
+      }, 2000)
+    }
+
+    red(green)
+
+
+    function green(res, yellow) {
+       console.log(res, 'green')
+       setTimeout(function() {
+        yellow && yellow('yellow') 
+       }, 3000)
+    }
+
+    function yellow(res) {
+      setTimeout(function() {
+        console.log(res, 'yellow')
+      }, 1000)
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
