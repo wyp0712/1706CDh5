@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <link rel="stylesheet" href="./scss/style.css">
+  <script src="./js/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <header class="header">
+
+    </header>
+
+    <main class="main">
+      <!-- 内容盒子 -->
+      <div class="content">
+
+        <!-- 每一个商品 -->
+        <div class="shop-item">
+          <header class="title"></header>
+
+          <main class="goods">
+
+            <div class="left">
+              <div class="left-circle">
+                <span class="circle"></span>
+              </div>
+
+              <div class="left-goods">
+                <dl>
+                  <dt><img src="" alt=""></dt>
+                  <dd>
+                    <p> title </p>
+
+                    <p> 介绍 </p>
+
+                    <p>
+                      <span class="price">59</span>
+                      <span> <a class="remove">-</a> <span class="count">1</span> <a class="add">+</a> </span>
+                    </p>
+                  </dd>
+                </dl>
+              </div>
+
+            </div>
+
+            <div class="right">
+              删除
+            </div>
+          </main>
+
+        </div> <!-- shop-item end  -->
+
+        <!-- 
+        总价：<input type="checkbox" class="totalCheck">
+        <br>
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check">
+        <input type="checkbox" class="check"> -->
+
+
+      </div>
+    </main>
+
+    
+    <div class="total">
+      
+    </div>
+
+    <footer class="footer">
+
+    </footer>
+
+  </div>
+
+  <script src="./mock/data.js"></script>
+  <script>
+
+    // var totalCheck = document.querySelector('.totalCheck');
+    // var check = [...document.querySelectorAll('.check')];
+
+    // // some every forEach reduce map filter;
+    // check.forEach(item => {
+    //   item.onclick = function () {
+    //     totalCheck.checked = check.every(val => {
+    //       return val.checked;
+    //     })
+    //   }
+    // })
+    
+    var ShopCart = function (opt) {
+      var defaults = {
+        addEl: '.add',
+        removeEl: '.remove',
+        success: function () {},
+        error: function () { },
+        totalCount: 0
+      }
+
+      this.opts = Object.assign({}, defaults, opt);
+      this.content = document.querySelector(this.opts.content)
+
+      this.init()
+    }
+
+    ShopCart.prototype = {
+      init: function () {
+        this.render()
+
+        this.remove()
+      },
+      render: function (data = this.opts.cartData) {
+        this.content.innerHTML = data.map(item => {
+          return `<div class="shop-item">
+          <header class="title"></header>
+          <main class="goods">
+            <div class="left">
+              <div class="left-circle">
+                <span class="circle"></span>
+              </div>
+              <div class="left-goods">
+                <dl>
+                  <dt><img src=${item.img} alt=""></dt>
+                  <dd>
+                    <p> ${item.title} </p>
+                    <p> ${item.msg} </p>
+                    <p>
+                      <span class="price">${item.price}</span>
+                      <span> <a  class="remove">-</a> <span class="count">${item.num}</span> <a class="add">+</a> </span>
+                    </p>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="right">
+              删除
+            </div>
+          </main>
+        </div>`
+        }).join('')
+
+        this.addDom = document.querySelectorAll(this.opts.addEl)
+        this.removeEl = document.querySelectorAll(this.opts.removeEL)
+
+        this.add();
+        this.remove();
+
+        // console.log(this.addDom, this.removeEl)
+
+      },
+      add: function () {
+
+        this.addDom.forEach((item, ind) => {
+          item.onclick = () => {
+            this.opts.cartData.map(item => {
+              if (ind == item.id) {
+                if (item.num >=3) {
+                  this.opts.success  && this.opts.success('数据太多了')
+                  return;
+                }
+                item.num++;
+              }
+            })
+            // console.log(this.opts.cartData, 'cartData')
+            this.render(this.opts.cartData)
+          }
+        })
+      },
+      remove: function () {
+        this.removeEl.forEach((item, ind) => {
+          item.onclick = () => {
+            this.opts.cartData.map(item => {
+              if (ind == item.id) {
+                item.num--
+              }
+            })
+          }
+        })
+      },
+      totalPrice: function () {
+        this.opts.cartData.map(item => {
+          this.opts.totalCount += item.price * item.num
+        })
+      }
+    }
+
+
+    new ShopCart({
+      cartData: shopData,
+      addEl: '.add',
+      removeEl: '.remove',
+      content: '.content',
+      success: function (res) {
+        
+        alert(res)
+      },
+      error: function () {}
+    })
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "goods": "小米水杯",
+    "num": 1,
+    "price": 50,
+    "totalPrice": 0,
+    "msg": "小米水杯 450ML",
+    "check": false
+  },
+  {
+    "id": 1,
+    "goods": "小米水杯1",
+    "num": 1,
+    "price": 50,
+    "totalPrice":0,
+    "msg": "小米水杯 450ML",
+    "check": false
+  },
+  {
+    "id": 2,
+    "goods": "小米水杯2",
+    "num": 1,
+    "price": 50,
+    "totalPrice":0,
+    "msg": "小米水杯 250ML",
+    "check": false
+  },
+  {
+    "id": 3,
+    "goods": "小米水杯3",
+    "num": 1,
+    "price": 50,
+    "totalPrice":0,
+    "msg": "小米水杯 450ML",
+    "check": false
+  },
+  {
+    "id": 4,
+    "goods": "小米水杯4",
+    "num": 1,
+    "price": 50,
+    "totalPrice":0,
+    "msg": "小米水杯 450ML",
+    "check": false
+  }
+]

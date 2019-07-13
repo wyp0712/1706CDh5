@@ -47,7 +47,6 @@ html, body, .wrap {
   position: absolute;
   left: -60%;
   top: 0;
-  transition: all .5s;
   background: lightblue;
 }
 

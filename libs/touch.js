@@ -4,7 +4,6 @@
     return new jQuery.fn.init(el);
   }
   jQuery.fn = jQuery.prototype = {
-    // $('')
     init: function (el) {
       if (!el) return this;
       if (typeof el === 'string') {
@@ -50,9 +49,11 @@
     tap: function (fn) {
       for (var i = 0; i < this.length; i++) {
         this[i].addEventListener('touchstart', touchFn);
+
         this[i].addEventListener('touchend', touchFn);
       }
       var startTime, endTime;
+
       function touchFn(e) {
         var firstTouch = e.changedTouches[0];
         switch (e.type) {
@@ -90,6 +91,7 @@
           case "touchend":
             //如果在500ms之内抬起了手指，则需要清除定时器
             clearTimeout(timerId);
+            handler && handler(this, e)
             break;
         }
       }

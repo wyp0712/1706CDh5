@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .cart-box {}
+
+    .cart {
+      padding: 20px;
+      margin: 5px;
+    }
+
+    .inner {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background: #eee;
+      text-align: center;
+      line-height: 60px;
+    }
+
+    .total {
+      margin-top: 20px;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background: #ccc;
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+  <div class="cart-box">
+
+    <div class="cart">
+      <button class="remove">-</button>
+      <span class="inner">0</span>
+      <button class="add">+</button>
+    </div>
+
+  </div>
+
+  <div class="total">
+
+  </div>
+
+
+
+
+  <script src="./ajax.js"></script>
+  <script src="./dialog.js"></script>
+  <script>
+
+    /*
+     1. go live   针对当前页面 html
+     2. 在浏览器中 127.0.0.1:5500/  localhost:5500/
+     2. 一个项目起一个服务，如果要再起一个，关闭另一个再起； 127.0.0.1：5501/
+    */
+
+
+    // function promise() {
+    //   return new Promise((resolve, reject) => {
+    //     resolve(new Error('找不到路径了'))
+    //   })
+    // }
+
+    // promise().then(res => {
+    //   console.log(res, 'res')
+    //   return res;
+    // })
+    // .catch(e => {
+    //   console.log(e, 'e')
+    // }) 
+
+
+    var CartShop = function (opt) {
+      var defaults = {
+        addEl: '.add',
+        removeEl: '.remove',
+        totalEl: '.total',
+        contentEl: '.cart-box',
+      }
+      
+      this.opts = Object.assign({}, defaults, opt);
+
+      this.contentEl = document.querySelector(this.opts.contentEl);
+      this.totalEl = document.querySelector(this.opts.totalEl);
+
+      this.count = 0;
+      this.init()
+    }
+    CartShop.prototype = {
+        init: function() {
+          this.render()
+        },
+        render: function(data = this.opts.cartData) {
+          this.contentEl.innerHTML = data.map(item => {
+            return `<div class="cart">
+                      <button class="remove">-</button>
+                      <span class="inner">${item.num}</span>
+                      <button class="add">+</button>
+                    </div>`
+          }).join('')
+          
+          this.addEl = document.querySelectorAll(this.opts.addEl);
+          this.removeEl = document.querySelectorAll(this.opts.removeEl);
+
+          this.add()
+          this.remove()
+        },
+        add: function() {
+          this.addEl.forEach((item, ind) => {
+            item.onclick = () => {
+              this.opts.cartData.map(val => {
+                if (ind === val.id) {
+                  if (val.num > 2) {
+                    this.opts.success && this.opts.success('超过库存了')
+                    return;
+                  }
+                  val.num++
+                }
+              })
+              console.log(this.opts.cartData, 'cafrtdata')
+              this.render(this.opts.cartData)
+              this.totalPrice()
+            }
+          })
+        },
+        remove: function() {
+
+        },
+        totalPrice:function() {
+          this.count = 0;
+          this.opts.cartData.map(item => {
+             this.count += item.price * item.num
+          })
+          this.totalEl.innerHTML = this.count;
+        }
+    }
+    ajax('./cart.json', function (res) {
+      // 将数据放在回调函数中出入  在ajax回调中调用构造函数
+      new CartShop({
+        addEl: '.add',
+        removeEl: '.remove',
+        totalEl: '.total',
+        contentEl: '.cart-box',
+        cartData: res,
+        success: function(res) {
+          new Dialog(res)
+        },
+        error: function() {}
+      })
+    })
+
+
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

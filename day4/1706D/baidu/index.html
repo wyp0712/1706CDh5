@@ -20,10 +20,12 @@
     <span id="btn">点击展开</span>
     <main class="main">
       <div class="dialog">
+
         <div class="mask"></div>
         <div class="tip">
           <span class="tip-btn">点击收起</span>
         </div>
+
       </div>
     </main>
   </div>
@@ -40,7 +42,12 @@
 
     btn.onclick = function() {
       dialog.style.display = 'block'
-      tip.style.left = '0'
+
+      // setTimeout(function(){
+        tip.style.left = '0'
+      // }, 10)
+
+
     }
 
     tipBtn.onclick = function() {

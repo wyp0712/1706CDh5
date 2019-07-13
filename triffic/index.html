@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+
+    function red() {
+      return new Promise((resolve, reject) => {
+        // console.log('red')
+        setTimeout(function () {
+          resolve('red')
+          // green && green('green', yellow)
+        }, 2000)
+      })
+    }
+
+    function green() {
+      return new Promise((resolve, reject) => {
+        setTimeout(function () {
+          resolve('green')
+          // green && green('green', yellow)
+        }, 2000)
+      })
+    }
+
+    function yellow(res) {
+      return new Promise((resolve, reject) => {
+        setTimeout(function () {
+          resolve('green')
+          // green && green('green', yellow)
+        }, 2000)
+      })
+    }
+
+    red().then(res => {
+      return green()
+    })
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

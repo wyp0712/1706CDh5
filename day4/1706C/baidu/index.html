@@ -8,10 +8,8 @@
 
   <link rel="stylesheet" href="./scss/index.css">
   <script src="../../../libs/flexible.js"></script>
-
   <title>Document</title>
 </head>
-
 <body>
 
   <div class="wrap">
@@ -37,7 +35,9 @@
     btn1.onclick = function () {
       mask.style.display = 'block';
       dialog.style.display = 'block'
-      tip.style.left = '0'
+
+      tip.style.transition = 'all 0.5s'
+      tip.style.left = '0%'
     }
 
     tipBtn.onclick = function () {

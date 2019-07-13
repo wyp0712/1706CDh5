@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .inner {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background: #eee;
+    }
+
+    .tatol {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="cartBox">
+    <button class="remove">-</button>
+    <span class="inner"></span>
+    <button class="add">+</button>
+    <br>
+    <button class="remove">-</button>
+    <span class="inner"></span>
+    <button class="add">+</button>
+    <br>
+    <button class="remove">-</button>
+    <span class="inner"></span>
+    <button class="add">+</button>
+  </div>
+
+  <div class="tatol"></div>
+
+
+  <script src="./ajax.js"></script>
+  <script src="./dialog.js"></script>
+  <script>
+
+    // console.log(ajax, 'ajax')
+
+
+
+
+    var ShopCart = function (opt) {
+      var defaults = {
+        el: '',
+        cartData: []
+      }
+      this.opts = Object.assign({}, defaults, opt);
+      console.log(this.opts)
+      this.cartBoxEl = document.querySelector(this.opts.cartBox)
+      this.totalEl = document.querySelector(this.opts.total)
+      this.count = 0;
+      this.init()
+    }
+
+    ShopCart.prototype = {
+      init: function () {
+        this.render()
+        this.totalPrice()
+      },
+      render: function (data = this.opts.cartData) {
+        this.cartBoxEl.innerHTML = data.map(item => {
+          return `<button class="remove">-</button>
+                     <span class="inner">${item.num}</span>
+                  <button class="add">+</button> <br> `
+        }).join('')
+        this.addEl = document.querySelectorAll(this.opts.addEl)
+        this.removeEl = document.querySelectorAll(this.opts.removeEl)
+        this.add()
+        this.remove()
+      },
+      add: function () {
+        this.addEl.forEach((item, ind) => {
+          item.onclick = () => {
+            this.opts.cartData.map(val => {
+              if (val.id === ind) {
+                if (val.num > 2) {
+                  this.opts.success && this.opts.success('不能再添加了')
+                  return;
+                }
+                val.num++;
+              }
+            })
+            this.render(this.opts.cartData)
+            this.totalPrice()
+          }
+        })
+      },
+      remove: function () {
+
+      },
+      totalPrice: function() {
+        var data = this.opts.cartData.map(item => {
+          return `${item.price * item.num}`
+        })
+        this.count = 0;
+        data.forEach(item => {
+          this.count += item * 1
+        })
+        this.totalEl.innerHTML = this.count;
+      }
+    }
+
+    ajax('./cart.json', function (res) {
+      // 回调函数中获取  解决异步的方案；
+      // console.log(res, 'res')
+      new ShopCart({
+        cartData: res,
+        addEl: '.add',
+        removeEl: '.remove',
+        cartBox: '.cartBox',
+        total:'.tatol',
+        success: function (res) {
+          new Dialog(res)
+         },
+        error: function() {}
+      })
+    })
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

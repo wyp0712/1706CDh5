@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      width: 100%;
+      /* height: 150px; */
+      overflow: hidden;
+      position: relative;
+    }
+
+    .box {
+      width: 200%;
+      height: 100px;
+      margin-bottom:5px;
+      display: flex;
+      transition: all 0.5s;
+
+    }
+
+    .box .left {
+      flex: 1;
+      background: red;
+    }
+
+    .box .right {
+      flex: 1;
+      background: blue;
+    }
+    .page-btn {
+      width: 100%;
+      height: 35px;
+      position: absolute;
+      left: 0;
+      bottom: 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .page-btn span {
+      display: inline-block;
+      margin-left: 2%;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #eee;
+    }
+    .page-btn .active {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+
+    <div class="box">
+      <div class="left" data-index="0"></div>
+      <div class="right" data-index="1"></div>
+    </div>
+    <div class="box">
+        <div class="left" data-index="0"></div>
+        <div class="right" data-index="1"></div>
+      </div>
+      <div class="box">
+          <div class="left" data-index="0"></div>
+          <div class="right" data-index="1"></div>
+        </div>
+        <div class="box">
+            <div class="left" data-index="0"></div>
+            <div class="right" data-index="1"></div>
+          </div>
+          <div class="box">
+              <div class="left" data-index="0"></div>
+              <div class="right" data-index="1"></div>
+            </div>
+
+    <div class="page-btn">
+      <span class="active"></span>
+      <span></span>
+    </div>
+  </div>
+
+
+  <script src="./mytouch.js"></script>
+  <script>
+
+    $('.box').swipeLeft(function(e) {
+      console.log(e)
+      this.style.transform = `translate(${-180}px)`
+    })
+
+    // var box = document.querySelector('.box');
+    // var boxW = box.offsetWidth / 2;
+
+    // var startx, starty, endx, endy;
+    // box.addEventListener('touchstart', function (e) {
+    //   startx = e.touches[0].pageX
+    //   starty = e.touches[0].pageY
+    //   console.log(e.target.dataset.index)
+    // })
+    // box.addEventListener('touchmove', function (e) {
+    //   endx = e.touches[0].pageX
+    //   endy = e.touches[0].pageY
+    // })
+    // box.addEventListener('touchend', function (e) {
+    //    var movex = endx - startx;
+    //    var movey = endy - starty;
+    //    console.log(movey, 'y')
+    //    if (movex < 0) {
+    //       box.style.transform = `translate(${-boxW}px)`
+
+    //    } else if (movex > 0) {
+    //     box.style.transform = `translate(${0}px)`
+    //    }
+    // })
+
+
+  </script>
+
+</body>
+
+</html>
