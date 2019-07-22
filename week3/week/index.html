@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./libs/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <header class="header">
+      <div class="left">
+
+      </div>
+      <div class="mid">
+
+      </div>
+      <div class="right">
+
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="content">
+      </div>
+    </main>
+  </div>
+
+
+  <script src="./libs/ajax.js"></script>
+  <script>
+
+    /*
+     1. 左边滑动 加载内容
+       // 内容宽度 - 可视宽度 - 滚动条高度  === 0；
+       // 看见button 就说明到底部;
+       button:  加点击事件，然后加载数据，重新渲染
+
+     2. 跳转页面
+         利用a标签跳转，在跳转的过程中，带参数 id = 0;
+         通过带过来的id ajax请求数据，并且过滤出需要的书籍信息；
+
+     3. 刷新页面数据还在；
+        本地存储， 先存再取； 更改之后的数据，存储再取；
+        ajax重新请求数据，并且渲染
+
+     4. 点赞： 本地存储：（账号密码对应上：）
+        确保登陆  账号密码都在；
+        如果账号密码不在， 跳转页面实现登陆； 登陆之后再跳转回来，
+        判断登陆与否，就可以实现点赞功能；点击加减
+     5.  展开合起功能；
+    */
+
+    var WeChartReading = function () {
+
+
+      this.content = document.querySelector('.content')
+      this.main = document.querySelector('.main')
+
+      this.init()
+    }
+
+    WeChartReading.prototype = {
+      init: function () {
+
+        this.getData()
+      },
+      getData: function () {
+        ajax('./mock/data.json', (res) => {
+          console.log(res)
+          this.render(res)
+        })
+      },
+      render: function (data) {
+        this.content.innerHTML += data.map(item => {
+          return `<ul class=uls> <a href="./detail.html?id=${item.id}">${item.name}</a> </ul>`
+        }).join('')
+        this.content.innerHTML += `<div class=tip>左滑加载</div>`;
+        // 内容宽度  每一个内容宽度  可视区看度  左滑动距离
+        this.uls = document.querySelectorAll('.uls');
+        this.tips = document.querySelector('.tip');
+
+        // 设置content总宽度
+        this.content.style.width = 600 * this.uls.length + this.tips.offsetWidth + 'px';
+        this.content.style.display = 'flex';
+        this.scrollEvent()
+      },
+      scrollEvent: function () {
+        var that = this;
+        this.main.addEventListener('scroll', scrollFn)
+        function scrollFn() {
+          // console.log(that.content)
+          if (that.content.offsetWidth - that.main.offsetWidth - that.main.scrollLeft === 0) {
+            that.main.removeEventListener('scroll', scrollFn)
+            that.tips.remove()
+            setTimeout(() => {   // tip
+              that.getData()
+            }, 2000)
+          }
+        }
+      }
+    }
+
+    new WeChartReading({
+
+    })
+
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

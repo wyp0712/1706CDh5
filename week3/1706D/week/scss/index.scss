@@ -1,0 +1,53 @@
+@import '../libs/reset.scss';
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+;
+
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #334453;
+}
+
+.header {
+  width: 100%;
+  height: rem(45px);
+}
+
+.main {
+  width: 100%;
+  flex: 1;
+  overflow-x: scroll;
+
+  .content {
+    // width: 500%;
+    height: 90%;
+    // display: flex;
+    // flex-wrap: wrap;
+    padding: rem(10px);
+    .uls {
+      width: 600px;
+      height: 100%;
+      border-radius: rem(10px);
+      @extend %juzhong;
+      color: #000000;
+      font-size: 50px;
+      background: #fff;
+      margin: rem(5px);
+    }
+    .tip {
+      width: 2%;
+      @extend %juzhong;
+      width: 2%;
+      font-size: 46px;
+      text-align: center;
+      color: #f8f2f2;
+    }
+  }
+}

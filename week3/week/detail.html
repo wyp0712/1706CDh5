@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>detail</title>
+</head>
+
+<body>
+
+
+  <h1>detail.html</h1>
+
+  <div class="content">
+
+  </div>
+
+
+
+
+  <script src="./libs/ajax.js"></script>
+  <script>
+    var content = document.querySelector('.content')
+    var id = window.location.search.replace(/^\?\w+\=/, '');
+
+    ajax('./mock/data.json', function (res) {
+      var list = res.filter(item => {
+        return item.id == id
+      })
+      render(list)
+    })
+
+    function render(data) {
+      content.innerHTML = data.map(item => {
+        return `<div> ${item.name} </div>`
+      }).join('')
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>

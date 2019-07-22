@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="./font_var55ifsf18/iconfont.css">
+  <style>
+    .heart {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .iconfont {
+      font-size: 50px;
+    }
+
+    /* .heart::before {
+     content: "";
+     display: block;
+     width: 100%;
+     height: 100%;
+   } */
+   .btn {
+     margin-top: 10px;
+     width: 100px;
+     height: 35px;
+     line-height: 35px;
+     text-align: center;
+     background: lightblue;
+     border-radius: 4px;
+   }
+   .box {
+     width: 200px;
+     height: 200px;
+     background: red;
+     transition: all 0.5s;
+   }
+
+   .show {
+     height: 200px;
+   }
+   .hide {
+     height: 0;
+   }
+  </style>
+  <title>detail</title>
+</head>
+
+<body>
+
+
+
+  <h1>detail.html</h1>
+  <div class="content"></div>
+  <div class="heart iconfont icon-xin"></div>
+
+
+
+  <div class="btn">下拉收起</div>
+  <div class="box">
+     
+  </div>
+
+  <script src="./libs/ajax.js"></script>
+  <script>
+    var content = document.querySelector('.content')
+    var heart = document.querySelector('.heart')
+    var btn = document.querySelector('.btn')
+    var box = document.querySelector('.box')
+
+    var stroge = window.localStorage;
+
+    heart.onclick = function () {
+      if (stroge.msg) {
+        
+        // if (this.classList.contains('icon-xin')) {
+        //   this.classList.remove('icon-xin')
+        //   this.classList.add('icon-xin1')
+        // } else {
+        //   this.classList.remove('icon-xin1')
+        //   this.classList.add('icon-xin')
+        // }
+      } else {
+
+        alert('请登陆')
+        window.location.href = 'login.html'
+      }
+
+
+
+    }
+
+    // 选取跳转页面之后的id
+    var globalID = window.location.search.replace(/^\?\w+\=/, '')  // ?id= 1
+    ajax('./mock/data.json', function (res) {
+      var list = res.filter(item => {
+        return item.id == globalID
+      })
+      render(list)
+    })
+
+    function render(data) {
+      content.innerHTML = data.map(item => {
+        return `<div>${item.name}</div>`
+      }).join('')
+    }
+
+
+    // 下拉收起
+    btn.onclick = function() {
+      box.classList.toggle('hide')
+    }
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
