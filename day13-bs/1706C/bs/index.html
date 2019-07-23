@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="./js/flexible.js"></script>
+  <link rel="stylesheet" href="./scss/index.css">
+  <link rel="stylesheet" href="./font_ysbd78ftmv/iconfont.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <header class="header"></header>
+    <main class="main">
+      <div class="content" data-top="下拉刷新" data-bottom="上拉加载">
+        <!-- <div class="tip-top iconfont icon-loading1"></div> -->
+
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+
+        <nav class="nav"> navs </nav>
+
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+      </div>
+    </main>
+    <footer class="footer">
+
+    </footer>
+  </div>
+
+  <script src="./js/ajax.js"></script>
+  <script src="./js/bscroll.js"></script>
+  <script>
+
+
+    var navItem = document.querySelector('.nav')
+    var flag = true;
+
+    var myBscroll = new BScroll('.main', {
+      click: true,
+      probeType: 1,
+      // mouseWheel: true,
+      // pullDownRefresh: {
+      //   threshold: 140,
+      //   stop: 80
+      // },
+      // pullUpLoad: true
+    })
+
+    // myBscroll.on('pullingDown', function () {
+    //   // setTimeout(function() {
+    //   ajax('./mock/data.json', function (res) {
+    //     myBscroll.finishPullDown()
+    //     myBscroll.refresh()
+    //   })
+    //   // }, 2000)
+    // })
+
+    // myBscroll.on('pullingUp', function () {
+    //   ajax('./mock/data.json', function (res) {
+    //     // setTimeout(function() {
+    //       myBscroll.finishPullUp()
+    // myBscroll.refresh()
+    //     // }, 2000)
+    //   })
+    // })
+
+   
+
+
+
+
+  </script>
+</body>
+
+</html>

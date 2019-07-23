@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./js/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+
+    <header class="header"></header>
+    <main class="main">
+      <div class="content">
+        <!-- canrousel -->
+        <div class="container">
+          <div class="wrapper">
+            <div class="slide">
+              slide1
+            </div>
+            <div class="slide">
+              slide1
+            </div>
+            <div class="slide">
+              slide1
+            </div>
+
+          </div>
+        </div>
+        <!--  -->
+
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+        <div class="sec">content1</div>
+
+
+
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </div>
+
+
+  <script src="./js/bscroll.js"></script>
+
+  <script>
+      
+      var container = document.querySelector('.container');
+      // 轮播图
+     var myBscroll = new BScroll('.container', {
+       click:true,
+       scrollX:true,
+
+     })
+     // 内容区
+     var myContentBS = new BScroll('.main', {
+       click:true,
+      //  scrollX:true,
+      probeType: 2
+     })
+
+
+    // 滚动事件  
+    myContentBS.on('scroll', function(pos) {
+      console.log(pos)
+    })
+  
+  
+  </script>
+
+</body>
+
+</html>
