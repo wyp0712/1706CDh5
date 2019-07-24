@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+.process {
+  width: 100%;
+  height: rem(60px);
+  border:1px solid black;
+}

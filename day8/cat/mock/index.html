@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    .wrap {
+      width: 100%;
+    }
+
+    .nav {
+      width: 100%;
+      height: 45px;
+      display: flex;
+    }
+
+    .nav span {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      width: 100%;
+    }
+
+    .inner {
+      width: 100%;
+      height: 130px;
+      border-bottom: 1px dashed black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .active {
+      background: lightblue;
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <nav class="nav">
+      <span>正在上映</span>
+      <span>即将上映</span>
+    </nav>
+
+    <div class="box">
+      <div class="inner">
+        <span>扫毒2</span>
+        <span>正在上映</span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src="../../../libs/ajax.js"></script>
+  <script>
+    function auto(fn) {
+      setTimeout(function () {
+        var a = 3;
+        fn && fn(a)
+      }, 3000)
+    }
+    auto(function (res) {
+      console.log(res)
+    })
+    var box = document.querySelector('.box')
+    var spans = document.querySelectorAll('.nav span')
+    spans.forEach((item, index) => {
+      item.onclick = function () {
+        for (var i = 0; i < spans.length; i++) {
+          spans[i].classList.remove('active')
+        }
+        item.classList.add('active')
+        getData(index)
+      }
+    })
+
+    function getData(index) {
+      ajax('./data.json', function (res) {
+        console.log(res.movieList, 'res')
+        if (index == 0) {
+          renderHTML(res.movieList, index)
+        } else {
+          renderHTML(res.movieList, index)
+        }
+      })
+    }
+
+
+    function renderHTML(data, index) {
+      // console.log(data, 'data')
+      console.log(index, 'index')
+      box.innerHTML = data.map(item => {
+        return ` <div class="inner">
+        <span>${item.nm}</span>
+        <span>${item.globalReleased ? '购票' : '即将上映'}</span>
+      </div>`
+      }).join('')
+
+
+      // box.innerHTML = data.map(item => {
+      //   if (item.globalReleased && index == 0) {
+      //     return ` <div class="inner">
+      //               <span>${item.nm}</span>
+      //               <span> 购票 </span>
+      //           </div>`
+      //   } else if (!item.globalReleased && index == 1) {
+      //     return ` <div class="inner">
+      //               <span>${item.nm}</span>
+      //               <span> 即将上映 </span>
+      //           </div>`
+      //   }
+      // }).join('')
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>

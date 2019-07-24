@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <script src="../../libs/flexible.js"></script>
+
+  <title>Document</title>
+  <style>
+  
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  
+  </style>
+</head>
+<body>
+    
+
+  <!-- 音频 mp3-->
+  <!-- <audio src=""></audio> -->
+
+  <!-- mp4 -->
+  <video src="./hello.mov" autoplay poster="../../img/icon.png" id="myVideo" width="300" height="300" controls preload="metadata"></video>
+
+
+  <div class="process">
+    <div class="bg">
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <input type="text" > <button id="btn">播放到</button>
+
+  <button id="muted">静音</button>
+  
+
+  <script>
+    // 播放（方法） 暂停（方法（）） 静音（属性 = ）    --- 快进  切歌
+    // play pause
+    // muted
+
+    var myVideo = document.getElementById('myVideo');
+    var input = document.querySelector('input')
+      
+     myVideo.oncanplay = function() {
+      console.log(myVideo.duration)   // 音乐总时长
+     }
+
+     btn.onclick = function() {
+       var val = input.value;
+        // 当前播放时长
+      myVideo.currentTime = val 
+      console.log(myVideo.currentTime, 'curr')
+     }
+
+     muted.onclick = function() {
+       myVideo.muted = true; // 当为true的时候，静音
+     }
+
+
+
+   
+
+  
+
+    // canplay  
+    // myVideo.oncanplay = function() {
+    //   console.log(this.duration)
+    // }
+
+
+
+
+
+
+
+
+     
+
+
+  
+  
+  </script>
+
+</body>
+</html>

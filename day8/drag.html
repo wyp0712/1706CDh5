@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    .dustbin {
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      display: flex;
+
+    }
+
+    .left {
+      flex: 4;
+      border-right: 1px dashed #ccc;
+      font-size: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .right {
+      flex: 6;
+    }
+
+    .box {
+      width: 160px;
+      height: 50px;
+      background: red;
+      margin: 10px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 50px;
+      color: #fff;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+
+
+  <div class="dustbin">
+    <div class="left">
+      垃圾桶
+    </div>
+    <div class="right">
+      <div class="box" draggable="true">1</div>
+      <div class="box" draggable="true">2</div>
+      <div class="box" draggable="true">3</div>
+      <div class="box" draggable="true">4</div>
+      <div class="box" draggable="true">5</div>
+    </div>
+  </div>
+
+
+  <script>
+
+    const dustbin = document.querySelector('.dustbin');
+    const left = document.querySelector('.left');
+    const right = document.querySelector('.right');
+    const box = document.querySelector('.box');
+
+    let item;
+    this.ondragstart = function (e) {
+      console.log(e.target.innerHTML)
+      e.dataTransfer.setData('text', e.target.innerHTMl)
+      item = e.target;
+    }
+    
+
+    left.ondragover = function (e) {
+      e.preventDefault()
+      left.style.background = '#ccc'
+    }
+
+    
+
+    left.ondrop = function (e) {
+      var target = e.dataTransfer.getData('text')
+      console.log(target, 'target')
+      console.log(item, 'item----')
+      item.parentNode.removeChild(item)
+
+      left.style.background = ''
+    }
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

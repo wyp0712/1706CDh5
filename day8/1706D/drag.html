@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    .wrap {
+      width: 500px;
+      height: 600px;
+      border: 1px solid black;
+      display: flex;
+    }
+
+    .left-dustbin {
+      flex: 4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+
+      border-right: 1px dashed black;
+    }
+
+    .right {
+      flex: 6;
+
+    }
+
+    .right .box {
+      width: 200px;
+      height: 60px;
+      background: red;
+      text-align: center;
+      line-height: 60px;
+      font-size: 35px;
+      color: #fff;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="left-dustbin">
+      垃圾桶
+    </div>
+    <div class="right">
+      <div class="box" draggable="true">1</div>
+      <div class="box" draggable="true">2</div>
+      <div class="box" draggable="true">3</div>
+      <div class="box" draggable="true">4</div>
+      <div class="box" draggable="true">5</div>
+    </div>
+  </div>
+  <script>
+    // 源头
+    var box = document.querySelectorAll('.box');
+    // 目标
+    var left = document.querySelector('.left-dustbin');
+    var item;
+    this.ondragstart = function (e) {
+      console.log(e.target)
+      // 设置类型 MIME 类型 
+      e.dataTransfer.setData('text', e.target.innerHTMl)
+      item = e.target;
+    }
+
+    left.ondragover = function (e) {
+      e.preventDefault();
+      left.style.background = 'blue';
+      left.innerHTML = '请松手'
+    }
+
+    left.ondrop = function (e) {
+      var target = e.dataTransfer.getData('text');
+      item.parentNode.removeChild(item)
+
+      left.style.background = '';
+      left.innerHTML = '垃圾桶'
+    }
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
