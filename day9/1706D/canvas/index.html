@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #myCanvas {
+      display: block;
+      border: 1px solid black;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+
+  <script>
+    // 
+    var myCanvas = document.querySelector('#myCanvas');
+
+    var context = myCanvas.getContext('2d'); // 获取上下文对象 
+
+
+    // moveTo  点   lineTo 划线  上色  - ： 描边   填充
+
+    //  context.moveTo(0, 0);
+
+    //  context.lineTo(500, 500);
+
+    //  context.stroke(); // 描边
+
+    //  context.moveTo(0, 500);
+
+    //  context.lineTo(500, 0);
+
+    //  context.stroke();
+
+    // context.fillStyle='red';
+
+    // context.fillRect(100, 100, 200, 200);
+
+
+    // 坐标系：
+
+    context.translate(50, 450);
+    context.moveTo(0, 0);
+    context.lineTo(400, 0);
+    context.moveTo(0, 0);
+    context.lineTo(0, -400);
+    context.stroke();
+    context.closePath(); // 结束绘制路径
+
+    // 柱状图
+
+    // for(var i = 1; i < 5 ;i ++) {
+    //   context.fillRect(i*50, 0, 30, -i * 50);
+    // }
+    //  x, y, width, height
+
+    // 圆心  半径
+    // x, y, r, 起始角度 结束角度 false  Math.PI / 180 * 360
+
+    // context.beginPath();
+    // context.arc(250, -250, 200, 0, Math.PI * 2)
+
+    // context.strokeStyle = 'red'
+    // context.lineWidth = '40'
+    // context.stroke() // 
+
+    // context.fillStyle = 'red';
+    // context.fill()
+
+    // context.save(); //  保存状态
+    // context.beginPath(); // 开始绘制
+    // context.moveTo(0, 0);
+    // context.lineTo(200, -350);
+    // context.lineWidth = 30;   // 线宽样式
+    // //  butt | round | square
+    // // context.lineCap = 'square'; // 线帽样式
+    // context.stroke()
+    // context.closePath()
+    // context.restore();  // 恢复状态
+
+    // context.save();
+    // context.beginPath(); // 开始绘制
+    // context.moveTo(100, -100);
+    // context.lineTo(200, -100);
+    // context.lineTo(200, -200);
+    // context.lineTo(100, -200);
+    // context.closePath() // 闭合路径
+    // context.stroke()
+    // context.restore();
+
+    // requestAnimationFrame()
+
+    for (var i = 0; i < 60; i++) {
+      context.save();
+      context.beginPath();
+      context.moveTo(200, -200);
+      context.arc(200, -200, 150, i * Math.PI / 180 * 6, Math.PI * 2)
+      context.stroke()
+      context.restore()
+    }
+
+    context.save();
+    context.beginPath();
+    // context.moveTo(200, -200);
+    context.arc(200, -200, 140, 0, Math.PI * 2)
+    context.fillStyle = '#fff'
+    context.fill()
+    context.restore()
+
+
+    // 字体
+    context.font = '30px sans-serif';
+    // context.fillText('hello world', 230, -230) // 实心字
+    context.strokeText('hello world', 230, -230) // 实心字
+
+    var data = [
+      { value: 335, name: '直接访问' },
+      { value: 310, name: '邮件营销' },
+      { value: 234, name: '联盟广告' },
+      { value: 135, name: '视频广告' },
+      { value: 1548, name: '搜索引擎' }
+    ]
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .process {
+      width: 100%;
+      height: 45px;
+      border: 1px solid black;
+      position: relative;
+    }
+
+    .process .bg {
+      width: 0;
+      height: 100%;
+      background: red;
+    }
+
+    .process .bg .dot {
+      width: 50px;
+      height: 50px;
+      background: lightcoral;
+      position: absolute;
+      left: 0;
+      top: -5px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <video src="./hello.mov" class="video" controls width="300" height="150"></video>
+
+
+
+  <input type="text" class="textVideo">
+
+  <button class="playBtn">播放按钮</button>
+  <button class="pauseBtn">暂停</button>
+  <button class="mutedBtn">静音按钮</button>
+
+
+  <div class="process">
+    <div class="bg">
+      <div class="dot"></div>
+    </div>
+
+  </div>
+
+  <script>
+
+    var video = document.querySelector('.video')
+    var pauseBtn = document.querySelector('.pauseBtn')
+    var playBtn = document.querySelector('.playBtn')
+    var mutedBtn = document.querySelector('.mutedBtn')
+    var textVideo = document.querySelector('.textVideo')
+    var process = document.querySelector('.process')
+    var bg = document.querySelector('.bg')
+    var dot = document.querySelector('.dot')
+
+    video.oncanplay = function () {
+      // console.log(parseInt(video.duration))
+      dot.ontouchmove = function (e) {
+        var movex = e.touches[0].pageX;
+        dot.style.left = movex + 'px';
+        bg.style.width = movex + 'px';
+        // 每移动一个px 就代表走了播放几秒   px / s
+        var moveSecond =  parseInt(video.duration)  /  process.offsetWidth
+        console.log(movex * moveSecond, 'movex * moveSecond')
+         video.currentTime = movex  * moveSecond;
+      }
+    }
+
+    playBtn.onclick = function () {
+      video.play()
+      video.currentTime = textVideo.value
+    }
+
+    pauseBtn.onclick = function () {
+      video.pause()
+    }
+
+    mutedBtn.onclick = function () {
+      video.muted = true;
+    }
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

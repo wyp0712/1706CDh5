@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .process {
+    width: 100%;
+    height: 35px;
+    background: #eee;
+  }
+  .process .bg {
+    width: 0;
+    height: 100%;
+    background: red;
+    text-align: center;
+    line-height: 35px;
+  }
+</style>
+
+<body>
+
+
+
+  <!-- MIME -->
+  <input type="file" id="inputFile" multiple='multiple'>
+  <img src="" id="imgs" alt="">
+
+  <div class="process">
+    <div class="bg">
+
+    </div>
+  </div>
+
+  <script>
+    // accept=".doc, .png, .jpg" 接受文件类型
+    //  multiple = 'multiple'
+    var inputFile = document.querySelector('#inputFile');
+    var imgs = document.querySelector('#imgs');
+    var process = document.querySelector('.process');
+    var bg = document.querySelector('.bg');
+    inputFile.onchange = function () {
+      var files = this.files[0];
+      var fr = new FileReader() // 上传文件域
+      fr.readAsDataURL(files)
+
+      fr.onload = function (e) {
+        // 生成一个base64的格式的文件
+        imgs.src = this.result;
+      }
+      
+      fr.onprogress = function(e) {
+        console.log(e.loaded)
+        bg.style.width = e.loaded / files.size * 100 + '%';
+        bg.innerHTML = parseInt(e.loaded / files.size * 100) + '%';
+
+      }
+    }
+
+  </script>
+</body>
+
+</html>

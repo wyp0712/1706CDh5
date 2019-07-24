@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+     
+     *{
+       margin: 0;
+       padding: 0;
+     }
+     .process {
+       width: 100%;
+       height: 35px;
+       background: #eee;
+       position: relative;
+     }
+     .process .bg {
+       width: 0;
+       height: 100%;
+       background: red;
+     }
+     .process .bg .dot {
+       width: 35px;
+       height: 35px;
+       background: lightcoral;
+       position: absolute;
+       left: 0;
+       top:0;
+     }
+  
+  </style>
+</head>
+<body>
+     
+
+
+  <video class="video" src="./hello.mov" width="300" height="150" controls></video>
+
+   
+
+  <div class="process">
+
+    <div class="bg">
+      <div class="dot">
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var process = document.querySelector('.process')
+    var bg = document.querySelector('.bg')
+    var dot = document.querySelector('.dot')
+    var video = document.querySelector('.video')
+    var max;
+    video.oncanplay = function() {
+      // 播放总时长
+      max = parseInt(this.duration)
+      // 每一个px 走几s  s / px   
+      var second = max /   process.offsetWidth;
+      console.log(second, 'sexond')
+      dot.ontouchmove = function(e) {
+        var movex = e.touches[0].pageX;
+        dot.style.left = movex + 'px';
+        bg.style.width = movex + 'px';
+        // 拖动改变当前播放时长
+        video.currentTime = movex * second;
+      }
+    }
+
+
+
+
+
+  </script>
+
+
+
+</body>
+</html>
