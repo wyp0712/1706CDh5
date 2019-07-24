@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .nav {
+      width: 100%;
+      height: 40px;
+      display: flex;
+    }
+
+    .nav span {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="nav">
+    <span>tab1</span>
+    <span>tab1</span>
+    <span>tab1</span>
+  </div>
+  <div class="content">
+
+  </div>
+
+
+  <script src="../../libs/ajax.js"></script>
+  <script>
+
+    var spans = document.querySelectorAll('span')
+    var content = document.querySelector('.content');
+    var stroage = window.localStorage; // { }
+    
+    getAJax()
+    spans.forEach((item, index) => {
+      item.onclick = function () {
+        getAJax(index)
+      }
+    })
+
+    function getAJax() {
+      if (stroage.msg) { // 判断本地存储中有没有，有的话就取出来
+        render(JSON.parse(stroage.msg))
+      } else {
+        ajax('./data.json', (res) => {
+          render(res)
+          // 存入本地存储中
+          stroage.msg = JSON.stringify(res)
+        })
+      }
+    }
+    
+    function render(data) {
+      content.innerHTML = data.map(item => {
+        return `<div>${item.id} ${item.distance} ${item.name} ${item.pingjia} </div>`
+      }).join('')
+    }
+
+
+    //  // 取
+    //  if (stroage.msg) {
+    //   JSON.parse(stroage.getItem(stroage.msg)) 
+    //   // JSON.parse(stroage.msg)
+    //  }
+    //  // 存 
+    //  stroage.setItem(msg, JSON.stringify({}))
+    //  // 删
+    //  stroage.removeItem('msg')
+    //  // 清除
+    //  stroage.clear()
+
+
+
+
+  </script>
+
+</body>
+
+</html>

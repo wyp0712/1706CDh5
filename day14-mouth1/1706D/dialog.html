@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .dialog {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      ;
+      top: 0;
+      background: #000000;
+      opacity: .7;
+    }
+
+    .tip {
+      /* z-index: 1; */
+      background: #fff;
+      width: 80%;
+      height: 60%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <button id="btn">点击删除</button>
+
+
+
+  <script>
+
+    // 回调函数： 一个函数 作为参数 传递到其他函数中， 并且执行；
+
+
+    btn.onclick = function () {
+
+      new Dialog({
+        sureBtn: ['确定', '取消'],
+        success: function (res) {
+         console.log('帮我个忙')
+        },
+        fail: function (res) {
+          alert(res)
+        }
+      })
+    }
+
+    var Dialog = function (opt) {
+      var defaults = {
+        sureBtn: ['确定', '取消'],
+        success: function () { },
+        fail: function () { }
+      }
+      this.opts = Object.assign({}, defaults, opt);
+      this.init()
+    }
+    Dialog.prototype = {
+      init: function () {
+        this.render()
+      },
+      render: function () {
+        var str = `<div class="dialog">
+              <div class="mask"></div>
+              <div class="tip">`
+        this.opts.sureBtn.forEach(item => {
+          str += `<button>${item}</button>`
+        })
+        str += `</div></div>`
+        var dom = document.createElement('div');
+        dom.className = 'box';
+        dom.innerHTML = str;
+        document.body.appendChild(dom)
+
+        this.bindEvent()
+      },
+      bindEvent: function () {
+        var btns = document.querySelectorAll('.tip button');
+        var box = document.querySelector('.box');
+        btns.forEach((item, index) => {
+          item.onclick = () => {
+            if (index == 0) {
+              this.opts.success && this.opts.success('我是成功的函数')
+              box.remove()
+            } else if (index == 1) {
+              this.opts.fail && this.opts.fail('我是fail的函数')
+              box.remove()
+            }
+          }
+        })
+      }
+    }
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

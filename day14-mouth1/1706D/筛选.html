@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .wrap {
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
+      background: lightblue;
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
+    }
+
+    .inp {
+      border: 1px solid black;
+      width: 50%;
+      height: 30px;
+      margin: 0 auto;
+      outline: none;
+    }
+
+    .content {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <input type="text" class="inp">
+
+    <div class="content">
+
+    </div>
+  </div>
+
+
+  <script src="../libs/ajax.js"></script>
+  <script>
+    var inp = document.querySelector('.inp');
+    var content = document.querySelector('.content');
+    inp.oninput = function () {
+      var vals = this.value.trim();
+      content.innerHTML = ''
+      if (vals) {
+        ajax('./mock/data.json', function (res) {
+          var list = res.filter(item => {
+            // console.log(item)
+            return String(item.id).includes(vals) || String(item.distance).includes(vals) || String(item.pingjia).includes(vals) || item.name.includes(vals)
+          })
+          content.innerHTML = list.map(item => {
+            return `<div>${item.id}</div>
+                  <div>${item.distance}</div>
+                  <div>${item.pingjia}</div>
+                  <div>${item.name}</div>`
+          }).join('')
+        })
+      }
+    }
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "distance": 10,
+    "pingjia": 5,
+    "name": "汉堡王"
+  },
+  {
+    "id": 2,
+    "distance": 20,
+    "pingjia": 3,
+    "name": "秦门~馍饭厨房"
+  },
+  {
+    "id": 3,
+    "distance": 500,
+    "pingjia": 4,
+    "name": "小恒水饺"
+  },
+  {
+    "id": 4,
+    "distance": 80,
+    "pingjia": 1,
+    "name": "三味口岸麻辣烫"
+  },
+  {
+    "id": 5,
+    "distance": 60,
+    "pingjia": 3,
+    "name": "小恒水饺2"
+  },
+  {
+    "id": 6,
+    "distance": 70,
+    "pingjia": 6,
+    "name": "汉堡王2"
+  }
+]

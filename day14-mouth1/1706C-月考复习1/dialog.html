@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .dialog {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+    .mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: black;
+      opacity: .5;
+    }
+
+    .tip {
+      width: 80%;
+      height: 50%;
+      background: #fff;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+
+  <script>
+
+    var dialog = document.querySelector('.dialog');
+
+
+    var Dialog = function (opt) {
+      var defaults = {
+        sureBtn: ['确定', '取消'],
+        success: function () { }
+      }
+      this.opts = Object.assign({}, defaults, opt);
+      this.init()
+    }
+    Dialog.prototype = {
+      init: function () {
+        this.render()
+      },
+      render: function () {
+        var dialogStr = ''
+        dialogStr = `<div class="dialog">
+                          <div class="mask"></div>
+                          <div class="tip">`
+                    this.opts.sureBtn.forEach(item => {
+                      dialogStr += `<button>${item}</button>`
+                    })
+        dialogStr += `</div></div>`
+        var dom = document.createElement('div');
+        dom.innerHTML = dialogStr;
+        dom.className = 'box'
+        document.body.appendChild(dom)
+        this.bindEvent()
+      },
+      bindEvent: function() {
+        var btns = document.querySelectorAll('button');
+        var box = document.querySelector('.box');
+        btns.forEach((item, index) => {
+          item.onclick = () => {
+            if (index == 0) {
+              this.opts.success && this.opts.success()
+              box.remove()
+            } else if  (index == 1) {
+              this.opts.fail && this.opts.fail()
+              box.remove()
+            }
+          }
+        })
+      }
+    }
+
+    new Dialog({
+      sureBtn: ['确定', '取消'],
+      success: function () {
+         alert('chenggong ')
+      },
+      fail: function() {
+       alert('fail')
+      }
+    })
+
+
+
+  </script>
+
+
+</body>
+
+</html>

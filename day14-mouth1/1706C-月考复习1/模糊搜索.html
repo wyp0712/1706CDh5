@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+    
+  <input type="text" class="user">
+
+  <div class="box">
+
+  </div>
+
+
+  <script src="../../libs/ajax.js"></script>
+  <script>
+      var user = document.querySelector('.user');
+      var box = document.querySelector('.box');
+
+      user.oninput = function() {
+        var vals = this.value.trim();
+        box.innerHTML = ''
+        if (vals) {
+          getAjax(vals)
+        }
+      }
+
+
+      function getAjax(vals) {
+        ajax('./data.json', (res) => {
+           
+          var list = res.filter(item => {
+            return String(item.id).includes(vals) || String(item.distance).includes(vals) || String(item.pingjia).includes(vals)
+          })
+
+          console.log(list, 'list')
+          box.innerHTML = list.map(item => {
+            return `<p>${item.id} ${item.distance} ${item.name}</p>`
+          }).join('')
+
+        })
+      }
+
+  
+  </script>
+
+
+</body>
+</html>
