@@ -42,30 +42,27 @@
       font-size: 50px;
     }
   }
-
-  .content::before{
-    content: attr(data-top); // attr() 属性选择函数
+   .content::before {
+      content: attr(data-top); // attr()  查找属性函数
+      display: block;
+      width: 100%;
+      height: rem(45px);
+      position: absolute;
+      top:rem(-45px);
+      left:0;
+      text-align: center;
+      line-height: rem(45px);
+      font-size: rem(15px);
+      background: lightblue;
+   }
+   .content::after {
+    content: attr(data-bottom); // attr()  查找属性函数
     display: block;
     width: 100%;
     height: rem(45px);
-    background: lightblue;
-    position: absolute;
-    top: rem(-45px);
-    left:0;
     text-align: center;
     line-height: rem(45px);
-    font-size: rem(20px);
-  }
-  
-  .content::after{
-    content: attr(data-bottom); // attr() 属性选择函数
-    display: block;
-    width: 100%;
-    height: rem(45px);
+    font-size: rem(15px);
     background: lightblue;
-    text-align: center;
-    line-height: rem(45px);
-    font-size: rem(20px);
   }
-
 }

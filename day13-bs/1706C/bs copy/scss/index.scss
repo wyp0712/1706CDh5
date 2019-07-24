@@ -1,0 +1,117 @@
+@import './reset.scss';
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header, .footer {
+  width: 100%;
+  height: rem(45px);
+  background: red;
+}
+.nav {
+  width: 100%;
+  height: rem(40px);
+  background: rgb(3, 89, 117);
+  display: flex;
+  span {
+    flex:1;
+    @extend %juzhong;
+    color: #fff;
+    font-size: rem(15px);
+  }
+  .active {
+    color: red;
+    transform: scale(1.3);
+  }
+}
+
+.main {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  .content {
+    width: 100%;
+    position: relative;
+    .nav {
+      width: 100%;
+      height: rem(30px);
+      background: blue;
+    }
+
+    .sec {
+      width: 90%;
+      margin: 0 auto;
+      height: rem(200px);
+      border-radius: 5px;
+      margin-bottom:rem(5px);
+      background: lightcoral;
+      text-align: center;
+      line-height: rem(200px);
+      color: #fff;
+      font-size: 50px;
+    }
+    .container {
+      width: 100%;
+      height: rem(200px);
+      margin-bottom:rem(5px);
+      .wrapper {
+        width: 500%;
+        height: 100%;
+        display: flex;
+        .slide{
+          flex:1;
+          &:nth-child(1) {
+            
+            background: rgb(7, 238, 76);
+          } 
+          &:nth-child(2) {
+            background: rgb(10, 117, 55);
+          }
+          &:nth-child(3) {
+            background: rgb(226, 74, 4);
+          }
+          &:nth-child(4) {
+            background: rgb(184, 230, 173);
+          }
+          &:nth-child(5) {
+            background: rgb(230, 173, 178);
+          }
+        }
+      }
+    }
+  }
+
+  .content::before{
+    content: attr(data-top); // attr() 属性选择函数
+    display: block;
+    width: 100%;
+    height: rem(45px);
+    background: lightblue;
+    position: absolute;
+    top: rem(-45px);
+    left:0;
+    text-align: center;
+    line-height: rem(45px);
+    font-size: rem(20px);
+  }
+  
+  .content::after{
+    content: attr(data-bottom); // attr() 属性选择函数
+    display: block;
+    width: 100%;
+    height: rem(45px);
+    background: lightblue;
+    text-align: center;
+    line-height: rem(45px);
+    font-size: rem(20px);
+  }
+
+}

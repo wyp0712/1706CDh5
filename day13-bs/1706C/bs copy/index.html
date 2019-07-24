@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./js/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="header"></div>
+    <nav class="nav" data-index="0">
+      <span class="active">已通过</span>
+      <span>未通过</span>
+      <span>待审核</span>
+    </nav>
+    <div class="main">
+      <div class="content" data-top="下拉刷新" data-bottom="上拉加载">
+        <!-- <div class="sec">sec1</div>
+        <div class="sec">sec2</div>
+        <div class="sec">sec3</div>
+        <div class="sec">sec4</div>
+        <div class="sec">sec5</div>
+        <div class="sec">sec6</div>
+        <div class="sec">sec7</div>
+        <div class="sec">sec8</div>
+        <div class="sec">sec9</div> -->
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+
+
+
+  <script src="./js/ajax.js"></script>
+  <script src="./js/bscroll.js"></script>
+  <script>
+
+
+
+
+
+    var MyBScroll = function (opt) {
+
+      var defults = {
+
+      }
+      this.opts = Object.assign({}, defults, opt)
+
+      this.content = document.querySelector('.content');
+      this.itemSpans = document.querySelectorAll('.nav span');
+      this.nav = document.querySelector('.nav');
+
+      this.init()
+    }
+    MyBScroll.prototype = {
+      init: function () {
+        this.getAjax((res) => {
+          this.render(res, 'top')
+        })
+        this.myBscroll()
+        this.pullDown()
+        this.pullUp()
+        this.bindNavEvent()
+      },
+      myBscroll: function () {
+        this.bs = new BScroll('.main', {
+          click: true,
+          pullDownRefresh: { // 开启下拉
+            threshold: 180,
+            stop: 80
+          },
+          pullUpLoad: {// 开启上拉
+            threshold: -100,
+          },
+          probeType: 2, // 实时出发滚动条事件
+          //  scrollX: true, // 横滚
+        })
+      },
+      getAjax: function (fn) {
+        ajax('./mock/data.json', (res) => {
+          fn && fn(res)
+        })
+      },
+      render: function (data, dir, index = 0) {
+        // console.log(dir, index, 'render------index')
+        var list = data.map(item => {
+          if (item.type === '已通过' && index == 0) {
+            return `<div class=sec>${item.country}</div>`
+          } else if (item.type === '未通过' && index == 1) {
+            return `<div class=sec>${item.country}</div>`
+          } else if (item.type === '待审核' && index == 2) {
+            return `<div class=sec>${item.country}</div>`
+          }
+        }).join('')
+
+        if (dir === 'top') {
+          this.content.innerHTML = list;
+        } else if (dir === 'bottom') {
+          this.content.innerHTML += list;
+        }
+      },
+      // 下拉
+      pullDown: function () {
+        var that = this;
+        // 监听下拉事件
+        this.bs.on('pullingDown', function () {
+          var ind = that.nav.dataset.index;
+          // console.log(ind, '下拉坐标index')
+          that.getAjax(function (res) {
+            setTimeout(function () {
+              that.render(res, 'top', ind)
+              // 结束下拉
+              that.bs.finishPullDown()
+              // 重新计算滚动条位置
+              that.bs.refresh();
+            }, 2000)
+          })
+        })
+      },
+      pullUp: function () {
+        var that = this;
+        // 监听下拉事件
+        this.bs.on('pullingUp', function () {
+          var ind = that.nav.dataset.index;
+          that.getAjax(function (res) {
+            setTimeout(function () {
+              that.render(res, 'bottom', ind)
+              // 结束下拉
+              that.bs.finishPullUp()
+              // 重新计算滚动条位置
+              that.bs.refresh();
+            }, 2000)
+          })
+        })
+      },
+      // tab切换
+      bindNavEvent: function() {
+        this.itemSpans.forEach((item, index) => {
+          item.onclick = () => {
+            for(var i = 0; i < this.itemSpans.length; i++) {
+              this.itemSpans[i].classList.remove('active')
+            }
+            item.classList.add('active')
+            // 点击tab切换绑定下标
+            this.nav.dataset.index = index
+            this.getAjax((res) => {
+              this.render(res, 'top', index)
+            })
+          }
+        })
+      }
+    }
+
+    new MyBScroll({
+
+    })
+
+
+
+
+  </script>
+</body>
+
+</html>

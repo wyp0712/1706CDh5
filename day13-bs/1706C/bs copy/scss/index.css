@@ -198,7 +198,6 @@ textarea {
 
 .header, .footer {
   width: 100%;
-  width: 100%;
   height: 1.2rem;
   background: red;
 }
@@ -206,57 +205,108 @@ textarea {
 .nav {
   width: 100%;
   height: 1.06667rem;
+  background: #035975;
   display: flex;
 }
 
 .nav span {
   flex: 1;
+  color: #fff;
+  font-size: 0.4rem;
+}
+
+.nav .active {
+  color: red;
+  transform: scale(1.3);
 }
 
 .main {
-  flex: 1;
   width: 100%;
+  flex: 1;
   overflow: hidden;
 }
 
-.content {
+.main .content {
   width: 100%;
+  position: relative;
 }
 
-.content .container {
+.main .content .nav {
+  width: 100%;
+  height: 0.8rem;
+  background: blue;
+}
+
+.main .content .sec {
+  width: 90%;
+  margin: 0 auto;
+  height: 5.33333rem;
+  border-radius: 5px;
+  margin-bottom: 0.13333rem;
+  background: lightcoral;
+  text-align: center;
+  line-height: 5.33333rem;
+  color: #fff;
+  font-size: 50px;
+}
+
+.main .content .container {
   width: 100%;
   height: 5.33333rem;
-  border-bottom: 1px solid black;
+  margin-bottom: 0.13333rem;
 }
 
-.content .container .wrapper {
-  width: 300%;
+.main .content .container .wrapper {
+  width: 500%;
   height: 100%;
   display: flex;
 }
 
-.content .container .wrapper .slide {
-  width: 33.3%;
-  height: 100%;
+.main .content .container .wrapper .slide {
+  flex: 1;
 }
 
-.content .container .wrapper .slide:nth-child(1) {
-  background: lightgoldenrodyellow;
+.main .content .container .wrapper .slide:nth-child(1) {
+  background: #07ee4c;
 }
 
-.content .container .wrapper .slide:nth-child(2) {
-  background: navy;
+.main .content .container .wrapper .slide:nth-child(2) {
+  background: #0a7537;
 }
 
-.content .container .wrapper .slide:nth-child(3) {
-  background: lightcoral;
+.main .content .container .wrapper .slide:nth-child(3) {
+  background: #e24a04;
 }
 
-.content .sec {
-  width: 90%;
-  height: 5.33333rem;
-  background: #da20ac;
-  border-radius: 4px;
-  margin: 0 auto;
-  margin-bottom: 0.13333rem;
+.main .content .container .wrapper .slide:nth-child(4) {
+  background: #b8e6ad;
+}
+
+.main .content .container .wrapper .slide:nth-child(5) {
+  background: #e6adb2;
+}
+
+.main .content::before {
+  content: attr(data-top);
+  display: block;
+  width: 100%;
+  height: 1.2rem;
+  background: lightblue;
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  text-align: center;
+  line-height: 1.2rem;
+  font-size: 0.53333rem;
+}
+
+.main .content::after {
+  content: attr(data-bottom);
+  display: block;
+  width: 100%;
+  height: 1.2rem;
+  background: lightblue;
+  text-align: center;
+  line-height: 1.2rem;
+  font-size: 0.53333rem;
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="./js/flexible.js"></script>
+  <link rel="stylesheet" href="./scss/index.css">
+  <link rel="stylesheet" href="./font_ysbd78ftmv/iconfont.css">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <div class="wrap">
+    <header class="header"></header>
+    <main class="main">
+      <div class="content" data-top="下拉刷新" data-bottom="上拉加载">
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+        <div class="sec">sec1</div>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </div>
+
+  <script src="./js/ajax.js"></script>
+  <script src="./js/bscroll.js"></script>
+  <script>
+    var content = document.querySelector('.content');
+    var myBscroll = new BScroll('.main', {
+      click: true,
+      // 开启下拉刷新
+      pullDownRefresh: {
+        threshold: 180, // 阀值
+        stop: 80      // 回弹停止位置
+      },
+      // 开启上拉加载
+      pullUpLoad: {
+        threshold: -100,
+      }
+    })
+
+    // 监听下拉事件
+    myBscroll.on('pullingDown', function () {
+      console.log(content.dataset)
+      content.dataset.top = '正在刷新'
+      ajax('./mock/data.json', function (res) {
+        setTimeout(function () {
+          content.dataset.top = '下拉刷新'
+          render(res)
+          myBscroll.finishPullDown() // 结束下拉刷新
+          myBscroll.refresh() // 重新计算dom位置
+        }, 2000)
+
+      })
+    })
+    // 监听上拉事件
+    myBscroll.on('pullingUp', function () {
+      content.dataset.bottom = '正在加载'
+      ajax('./mock/data.json', function (res) {
+        setTimeout(function () {
+          content.dataset.bottom = '上拉加载'
+          render(res)
+          myBscroll.finishPullUp() // 结束上拉刷新
+          myBscroll.refresh() // 重新计算dom位置
+        }, 2000)
+
+      })
+    })
+
+    function render(data) {
+      content.innerHTML += data.map(item => {
+        return `<div class=sec>${item.name}</div>`
+      }).join('')
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

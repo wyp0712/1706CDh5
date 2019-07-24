@@ -24,6 +24,15 @@
   background: red;
 }
 
+.nav {
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  span {
+    flex:1;
+    @extend %juzhong;
+  }
+}
 
 .main {
   flex: 1;

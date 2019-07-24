@@ -16,6 +16,11 @@
   <div class="wrap">
 
     <header class="header"></header>
+    <nav class="nav">
+      <span>tab1</span>
+      <span>tab2</span>
+      <span>tab3</span>
+    </nav>
     <main class="main">
       <div class="content">
         <!-- canrousel -->
@@ -33,7 +38,7 @@
 
           </div>
         </div>
-        <!--  -->
+        <!--  end -->
 
         <div class="sec">content1</div>
         <div class="sec">content1</div>
@@ -45,40 +50,43 @@
         <div class="sec">content1</div>
         <div class="sec">content1</div>
         <div class="sec">content1</div>
-
-
 
       </div>
     </main>
     <footer class="footer"></footer>
   </div>
 
-
   <script src="./js/bscroll.js"></script>
-
   <script>
-      
-      var container = document.querySelector('.container');
-      // 轮播图
-     var myBscroll = new BScroll('.container', {
-       click:true,
-       scrollX:true,
 
-     })
-     // 内容区
-     var myContentBS = new BScroll('.main', {
-       click:true,
+    var container = document.querySelector('.container');
+    var itemSpans = document.querySelector('.nav span');
+
+    itemSpans.forEach(item => {
+      item.onclick = function() {
+        
+      }
+    })
+    // 轮播图
+    var myBscroll = new BScroll('.container', {
+      click: true,
+      scrollX: true,
+    })
+
+    // 内容区
+    var myContentBS = new BScroll('.main', {
+      click: true,
       //  scrollX:true,
-      probeType: 2
-     })
-
+      probeType: 1
+    })
 
     // 滚动事件  
-    myContentBS.on('scroll', function(pos) {
+    myContentBS.on('scrollEnd', function (pos) {
       console.log(pos)
+      console.log(myContentBS.maxScroll)
     })
-  
-  
+
+
   </script>
 
 </body>

@@ -15,6 +15,11 @@
 
   <div class="wrap">
     <div class="header"></div>
+    <nav class="nav" data-index=0>
+      <span>已通过</span>
+      <span>未通过</span>
+      <span>待审核</span>
+    </nav>
     <div class="main">
       <div class="content" data-top="下拉刷新" data-bottom="上拉加载">
         <!-- <div class="sec">sec1</div>
@@ -30,20 +35,26 @@
     </div>
     <div class="footer"></div>
   </div>
-
-
-
+  
   <script src="./js/ajax.js"></script>
   <script src="./js/bscroll.js"></script>
-
   <script>
 
+    var content = document.querySelector('.content');
+    var itemSpans = document.querySelectorAll('.nav span');
+    var nav = document.querySelector('.nav');
 
-    ajax('./mock/data.json', function(res) {
-      render(res, 'top')
+    ajax('./mock/data.json', function (res) {
+      // nav 导航点击事件
+      render(res, 'top', 0)
+      itemSpans.forEach((item, index) => {
+        item.onclick = function () {
+          nav.dataset.index = index
+          render(res, 'top', index)
+        }
+      })
     })
 
-    var content = document.querySelector('.content');
     var myBScroll = new BScroll('.main', {
       click: true,
       // 开启下拉刷新
@@ -56,37 +67,46 @@
         threshold: -100
       }
     })
+
     myBScroll.on('pullingDown', function () {
       content.dataset.top = '正在刷新'
+      var ind = nav.dataset.index;
       // 请求数据
       ajax('./mock/data.json', function (res) {
-        // setTimeout(function () {
-          render(res, 'top')
+        setTimeout(function () {
+          render(res, 'top', ind)
           content.dataset.top = '下拉刷新'
           myBScroll.finishPullDown() // 结束下拉刷新
           myBScroll.refresh() // 重新计算dom位置
-        // }, 3000)
+        }, 2000)
       })
     })
 
     myBScroll.on('pullingUp', function () {
       content.dataset.bottom = '正在加载'
+      var ind = nav.dataset.index;
       ajax('./mock/data.json', function (res) {
-        // setTimeout(function () {
-          console.log(res, 'res')
-          render(res, 'bottom')
+        setTimeout(function () {
+          render(res, 'bottom', ind)
           content.dataset.bottom = '上拉加载'
           myBScroll.finishPullUp() // 结束上拉加载
           myBScroll.refresh() // 重新计算dom位置
-        // }, 3000)
+        }, 2000)
       })
     })
 
-    function render(data, dir) {
+    function render(data, dir, index) {
+      // content.innerHTML = '';
+      console.log(dir, index)
       var list = data.map(item => {
-        return `<div class=sec>${item.country}</div>`
+        if (item.type === '已通过' && index == 0) {
+          return `<div class=sec>${item.country}</div>`
+        } else if (item.type === '未通过' && index == 1) {
+          return `<div class=sec>${item.country}</div>`
+        } else if (item.type === '待审核' && index == 2) {
+          return `<div class=sec>${item.country}</div>`
+        }
       }).join('')
-
       if (dir === 'top') {
         content.innerHTML = list;
       } else if (dir === 'bottom') {
@@ -94,11 +114,6 @@
       }
     }
 
-    // function renderBottom(data) {
-    //   content.innerHTML += data.map(item => {
-    //     return `<div class=sec>${item.country}</div>`
-    //   }).join('')
-    // }
 
 
   </script>

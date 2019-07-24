@@ -50,5 +50,13 @@ function render() {
 }
 
 
+##  
+
+  1. scrollTo(x,y,time)  楼层
+  2. scrollToElement('item', time);  返回顶部
+  4. scrollX: true  // 横滚
+  3. probeType: 0 1 2 3 开启滚动条事件
+
+
 
 
