@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+      border: 1px solid black;
+    }
+
+    #myCanvas {
+      display: block;
+      /* border: 1px solid black; */
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+  </div>
+
+
+  <script src="./ajax.js"></script>
+  <script>
+
+    var wrap = document.querySelector('.wrap');
+
+    var myPie = function (option) {
+      var defaults = {
+        el: '#myCanvas',
+        width: '500',
+        height: '500',
+        r: 150,
+
+      }
+
+      this.opts = Object.assign({}, defaults, option)
+      this.myCanvas = document.querySelector(this.opts.el);
+
+      myCanvas.width = wrap.offsetWidth;
+      myCanvas.height = wrap.offsetHeight;
+      this.api = this.myCanvas.getContext('2d'); // 
+
+      this.totalNum = 0;
+      this.deg = Math.PI / 180
+      this.pre = 0;
+      this.x = 0
+      this.y = 0
+      this.r = 100;
+
+      this.init()
+    }
+
+    myPie.prototype = {
+      init: function () {
+        this.opts.data.forEach(item => {
+          this.totalNum += item.value;
+        })
+        if (this.opts.type === 'pie') {
+          this.drawPie()
+        } else if (this.opts.type === 'line') {
+          this.drawLine()
+        } else {
+          this.drawBar()
+        }
+      },
+      drawLine: function () { },
+      drawBar: function () { },
+      drawPie: function () {
+        this.api.translate(wrap.offsetWidth / 2, wrap.offsetHeight / 4);
+
+        this.opts.data.map(item => {
+          var currentDeg = (item.value / this.totalNum) * 360 * this.deg;
+
+
+          this.api.beginPath();
+          this.api.moveTo(this.x, this.y);
+          this.api.arc(this.x, this.y, this.r, this.pre, this.pre + currentDeg);
+
+          this.api.stroke()
+
+          // this.pre   起始角度
+          // currenDeg  当前角度
+          // this.pre + currdeg  起始角度
+
+          var x = Math.cos(this.pre + currentDeg / 2) * this.r;
+          var y = Math.sin(this.pre + currentDeg / 2) * this.r;
+          var x1 = Math.cos(this.pre + currentDeg / 2) * (this.r + 30);
+          var y1 = Math.sin(this.pre + currentDeg / 2) * (this.r + 30);
+          if (x1 > 0) {
+            var x2 = x1 + 30;
+            var y2 = y1;
+          } else {
+            var x2 = x1 - 30;
+            var y2 = y1;
+          }
+          this.api.moveTo(x, y)
+          this.api.lineTo(x1, y1);
+          this.api.lineTo(x2, y2);
+          this.api.stroke()
+
+
+          if (x2 > 0) {
+            this.api.font = '20px sans-serif';
+            this.api.fillText(item.name, x2, y2 + 10)
+          } else {
+            this.api.font = '20px sans-serif';
+            this.api.fillText(item.name, x2 - 80, y2 + 10)
+          }
+
+          this.pre += currentDeg;
+
+
+        })
+      }
+    }
+
+    ajax('./data.json', function (res) {
+      new myPie({
+        el: '#myCanvas',
+        data: res,
+        width: wrap.offsetWidth,
+        height: wrap.offsetHeight,
+        r: 100,
+        type: 'pie'
+      })
+    })
+
+
+
+
+
+
+    //  api.beginPath();
+    // //  api.moveTo(250, 250);
+
+    //  api.arc(250,250, 200, 0, Math.PI / 180 * 270, true)
+    //  api.lineWidth=30;
+
+    //  api.stroke();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //  api.beginPath();
+    // //  api.moveTo(250, 250);
+    //  api.arc(250, 250, 200, 30 * Math.PI/ 180, Math.PI *2);
+    //  api.lineWidth = '30';
+    // //  api.closePath();
+    // // butt | round | square
+    // api.lineCap='round';
+    // api.strokeStyle = 'red'
+    //  api.stroke()
+    // api.beginPath();
+    // api.fillRect(100, 100, 300, 150)
+    // api.save()
+    // api.beginPath();
+    // api.moveTo(0,0)
+    // api.lineTo(500,500)
+    // api.lineWidth = 10;
+    // api.stroke()
+    // api.restore();
+    // api.save()
+    // api.beginPath();
+    // api.moveTo(300, 300)
+    // api.lineTo(450, 400)
+    // api.stroke()
+    // api.restore();
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

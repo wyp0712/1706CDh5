@@ -1,0 +1,27 @@
+[
+  {
+    "value": 335,
+    "name": "直接访问",
+    "color": "red"
+  },
+  {
+    "value": 310,
+    "name": "邮件营销",
+    "color": "green"
+  },
+  {
+    "value": 234,
+    "name": "联盟广告",
+    "color": "yellow"
+  },
+  {
+    "value": 135,
+    "name": "视频广告",
+    "color": "navy"
+  },
+  {
+    "value": 1548,
+    "name": "搜索引擎",
+    "color": "pink"
+  }
+]

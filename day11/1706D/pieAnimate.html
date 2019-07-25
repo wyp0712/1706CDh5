@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    #myCanvas {
+      display: block;
+      border: 1px solid black;
+      margin: 0 auto;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+  </div>
+
+  <script>
+
+    var myCanvas = document.querySelector('#myCanvas')
+    // 先设置canvas画布大小
+    var api = myCanvas.getContext('2d')
+    var timer = null;
+
+    var j = 0;
+    function animte() {
+      j++;
+      api.clearRect(0, 0, 500, 500);
+      api.beginPath();
+      var text = j / 360 * 100;
+      createText(text.toFixed(2), 250, 250)
+      api.arc(250, 250,100, 0, Math.PI / 180 * j)
+      api.lineWidth = 30
+      api.stroke()
+      timer = requestAnimationFrame(animte)
+      if (j >= 360) {
+        cancelAnimationFrame(timer)
+      }
+    }
+    requestAnimationFrame(animte)
+
+    // 字体函数
+    function createText(name, x, y) {
+      api.font='20px sans-serif';
+      // 字体样式
+      api.textAlign='center';
+      api.textBaseline='middle';
+      api.fillText(name, x, y);
+    }
+
+
+
+  </script>
+
+
+</body>
+
+</html>

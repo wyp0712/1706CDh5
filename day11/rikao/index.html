@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .item {
+      width: 100%;
+      height: 30px;
+      margin-bottom: 5px;
+      background: red;
+      text-align: center;
+      line-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <input class="files" type="file" multiple="multiple" accept="">
+
+  <div class="uls">
+    <div class="left">
+
+    </div>
+    <div class="right">
+
+    </div>
+  </div>
+
+  <script>
+
+    var files = document.querySelector('.files')
+    var left = document.querySelector('.left')
+    var right = document.querySelector('.right')
+
+    files.onchange = function () {
+      var fileItem = [...this.files];
+      fileItem.forEach(item => {
+        var fr = new FileReader()
+        fr.readAsDataURL(item)
+        fr.onload = function () {
+          left.innerHTML += `<img src=${this.result}>`
+        }
+        fr.onprogress = function (e) {
+          right.innerHTML += `<div class=item style="width: ${e.loaded / item.size * 100}%"> ${e.loaded / item.size * 100}% </div>`
+        }
+      })
+    }
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

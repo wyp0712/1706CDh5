@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./js/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <header class="header"></header>
+    <main class="main">
+      <!-- 内容盒子 -->
+      <div class="content">
+        <ul class="left">
+          <li>A</li>
+          <li>城市</li>
+        </ul>
+        <ol class="right"></ol>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </div>
+
+  <script src="./js/ajax.js"></script>
+  <!-- <script src="./js/floor.js"></script> -->
+  <script>
+
+
+    var Myfloor = function (opt) {
+       
+
+      this.left = document.querySelector('.left')
+      this.right = document.querySelector('.right')
+
+      this.opts = opt;
+      this.init()
+    }
+
+    Myfloor.prototype = {
+      init: function () {
+        this.sortFn() 
+        this.render()
+      },
+      sortFn: function () {
+
+       var datas = this.opts.data.sort((a, b) => {
+          return a.PrefixEName.localeCompare(b.PrefixEName)
+        })
+        console.log(datas, 'data')
+        return datas;
+      },
+      render: function () {
+         var list = this.sortFn()
+         var str = '<h1 class=item>A</h1>';
+         var alpha = '<li>A</li>'  
+         // 前一个和后一个进行比较， 相等不渲染， 不相等要后一个
+         for(var i = 0; i < list.length; i++) {
+           if (list[i] && list[i+1]) {
+             if (list[i].PrefixEName === list[i+1].PrefixEName) {
+               str += `<li> ${list[i].Name} </li>`
+             } else {
+               str += `<li> ${list[i].Name} </li> <h1 class=item>${list[i+1].PrefixEName} </h1>`
+               alpha += `<li>${list[i+1].PrefixEName}</li>`
+             }
+           }
+         }
+         str+= `<li> ${list[list.length-1].Name} </li>`
+         this.left.innerHTML = str;
+         this.right.innerHTML = alpha;
+
+         this.bindEvent()
+
+      },
+      bindEvent: function () {
+        var rightDom = document.querySelectorAll('.right li')
+        var leftDom = document.querySelectorAll('.item')
+        var main = document.querySelector('.main')
+        var heightArr = []
+
+        leftDom.forEach(val => {
+          heightArr.push(val.offsetTop)
+        })
+        console.log(heightArr, 'heightArr')
+
+
+
+        rightDom.forEach((item, index) => {
+          item.onclick = function() {
+            console.log(index,'index')
+            main.scrollTop = heightArr[index]
+          }
+        })
+
+
+      }
+    }
+
+
+    ajax('./longceng.json', function (res) {
+      new Myfloor({
+        data: res
+      })
+    })
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

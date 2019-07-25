@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    #myCanvas {
+      display: block;
+      border: 1px solid black;
+      margin: 0 auto;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <canvas id="myCanvas"></canvas>
+  </div>
+
+
+
+  <script src="./ajax.js"></script>
+  <script>
+
+    var wrap = document.querySelector('.wrap');
+
+    var Mypie = function (option) {
+
+      var defaults = {
+        el: "#myCanvas",
+        width: 500,
+        height: 500,
+        r: 100
+      }
+
+
+      this.opts = Object.assign({}, defaults, option);
+
+      this.myCanvas = document.querySelector(this.opts.el)
+      // 先设置canvas画布大小
+      this.myCanvas.width = wrap.offsetWidth;
+      this.myCanvas.height = wrap.offsetHeight;
+      this.api = this.myCanvas.getContext('2d')
+
+      this.totalNum = 0;
+      this.deg = Math.PI / 180;
+      this.pre = 0;
+      this.x = 0;
+      this.y = 0;
+      this.r = this.opts.r;
+
+      this.api.translate(wrap.offsetWidth / 2, wrap.offsetHeight / 4);
+
+
+      this.init()
+    }
+    Mypie.prototype = {
+      // 总数
+      init: function () {
+        this.opts.data.map(item => {
+          this.totalNum += item.value;
+        })
+
+        if (this.opts.type === 'pie') {
+          this.drawPie()
+        } else if (this.opts.type === 'line') {
+          this.drawLine()
+        } else {
+          this.drawBar()
+        }
+      },
+      drawLine: function () { },
+      drawBar: function () { },
+      drawPie: function () {
+        this.opts.data.map(item => {
+
+          var currentDeg = (item.value / this.totalNum) * 360 * this.deg;
+
+          this.api.save()
+          this.api.beginPath();
+
+          // this.api.moveTo(this.x, this.y);
+
+          this.api.arc(this.x, this.y, this.r, this.pre, this.pre + currentDeg)
+
+          // this.api.fillStyle = item.color;
+          // this.api.fill()
+          this.api.strokeStyle = item.color;
+          this.api.lineWidth = 30
+          this.api.stroke()
+          this.api.closePath();
+          this.api.restore();
+
+          var x = Math.cos(this.pre + currentDeg / 2) * (this.r + 20);
+          var y = Math.sin(this.pre + currentDeg / 2) * (this.r + 20);
+
+          // this.api.beginPath();
+          // this.api.arc(x, y, 5, 0, Math.PI *2);
+          // this.api.stroke()
+
+          var x1 = Math.cos(this.pre + currentDeg / 2) * (this.r + 50);
+          var y1 = Math.sin(this.pre + currentDeg / 2) * (this.r + 50);
+
+          // this.api.beginPath();
+          // this.api.arc(x1, y1, 5, 0, Math.PI *2);
+          // this.api.stroke()
+
+          if (x1 > 0) {
+            var x2 = x1 + 30
+            var y2 = y1
+          } else {
+            var x2 = x1 - 30
+            var y2 = y1
+          }
+
+          // this.api.beginPath();
+          // this.api.arc(x2, y2, 5, 0, Math.PI *2);
+          // this.api.stroke()
+
+          this.api.save()
+          this.api.beginPath();
+          this.api.moveTo(x, y)
+          this.api.lineTo(x1, y1)
+          this.api.lineTo(x2, y2)
+          this.api.stroke()
+          this.api.restore()
+
+
+          if (x2 > 0) {
+
+            this.api.font = '20px sans-serif';
+            this.api.fillText(item.name, x2, y2 + 8);
+          } else {
+            this.api.font = '20px sans-serif';
+            this.api.fillText(item.name, x2 - 80, y2 + 8);
+          }
+
+
+
+          //
+          this.pre += currentDeg;
+
+        })
+      }
+    }
+
+    ajax('./data.json', function (res) {
+      new Mypie({
+        el: '#myCanvas',
+        data: res,
+        r: 100,
+        width: 500,
+        height: 500,
+        type: 'pie'
+      })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

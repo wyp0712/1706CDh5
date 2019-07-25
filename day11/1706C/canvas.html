@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+      border: 1px solid black;
+    }
+
+    #myCanvas {
+      /* border:1px solid black; */
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="wrap">
+    <canvas id="myCanvas"></canvas>
+  </div>
+
+
+
+
+  <script>
+
+    var myCanvas = document.querySelector('#myCanvas');
+    var wrap = document.querySelector('.wrap');
+
+    myCanvas.width = wrap.offsetWidth;
+    myCanvas.height = wrap.offsetHeight;
+    var api = myCanvas.getContext('2d');
+
+    var x = wrap.offsetWidth / 2   // x 中心
+    var y = wrap.offsetHeight / 4  // y 中心
+
+    // 绘制图形用方法， 绘制样式用属性
+    api.save()
+    api.beginPath();
+    // api.moveTo(x, y)
+    api.arc(x, y, 100, 0, Math.PI * 2)
+    api.stroke()
+    api.restore()
+
+    auto()
+    setInterval(auto, 1000)
+    // api.clearRect(0, 0, 375, 375);
+    function auto() {
+      var today = new Date();
+      var second = today.getSeconds()
+      api.save()
+      api.translate(x, y);
+      api.rotate(Math.PI / 180 * 6 * second);
+      api.moveTo(0, 0)
+      api.lineTo(0, -80);
+      api.stroke()
+      api.restore();
+    }
+
+
+
+
+
+
+
+
+
+    // api.clearRect(0, 0, 500,500)
+    // for(var i = 0; i < 60; i++) {
+
+    //   api.beginPath();
+    //   api.moveTo(x, y)
+    //   api.arc(x, y, 100, i * 6 * Math.PI/180, Math.PI *2)
+    //   api.stroke()
+    // }
+
+
+    // api.beginPath();
+    //   api.arc(x, y, 80, 0, Math.PI *2)
+    //   api.fillStyle = '#fff'
+    //   api.fill()
+
+    // dian
+    // api.moveTo(x, y);
+
+    // xian
+    // api.moveTo(x, y);
+
+    // api.lineWidth = '' // 线宽
+    // api.lineCap = 'round' // 线帽
+    // api.lineTo()
+    // api.stroke()
+
+    // mian  三角形  矩形  圆
+
+    // api.save()
+    // api.beginPath();
+    // api.arc()
+    // api.fillRect()
+    // api.restore();
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

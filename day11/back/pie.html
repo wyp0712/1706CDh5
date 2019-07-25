@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #myCanvas {
+      display: block;
+      border: 1px solid black;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+
+
+
+  <script>
+    var data = [
+      { value: 335, name: '直接访问',color: '#5a0505' },
+      { value: 310, name: '邮件营销', color: 'green' },
+      { value: 234, name: '联盟广告', color: 'blue' },
+      { value: 135, name: '视频广告',color:'yellow' },
+      { value: 1548, name: '搜索引擎', color: 'red' }
+    ]
+
+    var myCanvas = document.getElementById('myCanvas');
+    var api = myCanvas.getContext('2d');
+
+    var totalNum = 0;
+
+    data.forEach(item => {
+      totalNum += item.value;
+    })
+
+    var pre = 0;
+    var deg = Math.PI / 180;
+    api.translate(250, 250)
+
+    data.map(item => {
+      
+      var current = (item.value / totalNum) * 360 * deg;
+      console.log(current, 'ciir')
+     
+      api.beginPath();
+      api.moveTo(0, 0);
+      
+      api.arc(0, 0, 100, pre, pre + current)
+      api.fillStyle = item.color;
+      api.fill()
+      api.stroke()
+
+      var x = Math.cos(pre + current / 2) * 100;
+      var y = Math.sin(pre + current / 2) * 100;
+
+      var x1 = Math.cos(pre + current / 2) * 130;
+      var y1 = Math.sin(pre + current / 2) * 130;
+
+      if (x1 > 0) {
+        var x2 = x1 + 30;
+        var y2 = y1;
+      } else {
+        var x2 = x1 - 50;
+        var y2 = y1;
+      }
+
+
+
+      api.beginPath();
+      api.moveTo(x, y);
+      api.lineTo(x1, y1);
+      api.lineTo(x2, y2);
+      api.stroke()
+
+
+      if (x2 > 0) {
+        api.font = '20px sans-serif';
+        api.fillText(item.name, x2, y2 + 10);
+      } else {
+        api.font='20px sans-serif';
+        api.fillText(item.name, x2 - 80, y2 + 10);
+      }
+      pre += current;
+
+    })
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
