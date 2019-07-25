@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      width: 100%;
+      height: 45px;
+      ;
+      background: red;
+    }
+
+    .nav {
+      width: 100%;
+      height: 40px;
+      ;
+      background: navajowhite;
+      display: flex;
+
+    }
+
+    .nav span {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .active {
+      color: red;
+      /* transform: scale(1.3); */
+    }
+
+    .content {
+      width: 100%;
+
+    }
+    .swiper-box {
+      width: 100%;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 150px;
+    }
+    .swiper-container .swiper-wrapper {
+      width: 100%;
+      height: 150px;
+    }
+    .swiper-container .swiper-wrapper .swiper-slide {
+      width: 100%;
+      height: 150px;
+    }
+    .swiper-container .swiper-wrapper .swiper-slide img{
+      width: 100%;
+      height: 150px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="../libs/swiper.css">
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <header class="header"></header>
+
+  <div class="swiper-box">
+
+  </div>
+
+    <nav class="nav">
+      <span class="active">正在热映</span>
+      <span>即将上映</span>
+    </nav>
+
+    <div class="content">
+
+    </div>
+  </div>
+
+
+  <script src="../libs/swiper.js"></script>
+  <script src="../libs/ajax.js"></script>
+  <script>
+
+    var myMovie = function () {
+      this.navSpans = document.querySelectorAll('.nav span')
+      this.content = document.querySelector('.content')
+      this.swiperBox = document.querySelector('.swiper-box')
+
+      this.init()
+    }
+    myMovie.prototype = {
+      init: function () {
+        this.getAjax()
+        this.bindEvent()
+      },
+      getAjax: function (index) {
+        ajax('./data.json', (res) => {
+          console.log(res)
+          this.render(res.movieArr, 'movie', index)
+          this.render(res.swiper, 'swiper')
+        })
+      },
+      render: function (data, dir, ind) {
+        if (dir === 'swiper') {
+
+         this.swiperBox.innerHTML = `<div class="swiper-container">
+          <div class="swiper-wrapper">
+           ${data.map(item => {
+             return `<div class='swiper-slide'> <img src = ${item.img} > </div>`
+           }).join('')}
+          </div>
+        </div>`;
+        } else if (dir === 'movie') {
+          this.content.innerHTML = data.map(item => {
+            if (ind == 0 && item.globalReleased) {
+              console.log('0')
+              return `<div>${item.nm}</div>`
+            } else if (ind == 1 && item.globalReleased == false) {
+              console.log('1')
+              return `<div>${item.nm}</div>`
+            }
+          }).join('')
+        }
+        this.mySwiper()
+      },
+      mySwiper: function () {
+         new Swiper('.swiper-container', {})
+      },
+      myBscroll: function () { },
+      bindEvent: function () {
+        this.navSpans.forEach((item, index) => {
+          item.onclick = () => {
+            // item.classList.remove('active')
+            for (var i = 0; i < this.navSpans.length; i++) {
+              this.navSpans[i].classList.remove('active')
+            }
+            item.classList.add('active')
+            // this.navSpans[index].classList.add('active')
+            // console.log(index)
+            this.getAjax(index)
+          }
+        })
+      }
+    }
+    new myMovie()
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

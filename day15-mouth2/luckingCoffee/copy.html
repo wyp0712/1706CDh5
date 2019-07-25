@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./scss/style.css">
+  <link rel="stylesheet" href="./libs/swiper.css">
+  <script src="./libs/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <header class="header"></header>
+    <div class="main">
+      <div class="content">
+
+
+        <!-- swiper -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              1
+            </div>
+            <div class="swiper-slide">
+              1
+            </div>
+            <div class="swiper-slide">
+              1
+            </div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <span>tab1</span>
+          <span>tab1</span>
+          <span>tab1</span>
+        </nav>
+
+        <!-- better-scroll -->
+        <div class="bs-container">
+          <ul class="left">
+            <li class="active left-item">tab1</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+            <li class="left-item">tab2</li>
+            <li class="left-item">tab3</li>
+          </ul>
+          <ul class="right">
+            <div class="right-content">
+              <h1 class="right-item">标题1</h1>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <h1 class="right-item">标题2</h1>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <h1 class="right-item">标题3</h1>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+              <li>tab1 content</li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+  </div>
+
+
+
+  <script src="./libs/bscroll.js"></script>
+  <script src="./libs/swiper.js"></script>
+  <script src="./libs/ajax.js"></script>
+  <script>
+
+    new Swiper('.swiper-container', {})
+
+    var LuckCoffee = function () {
+      this.right = document.querySelector('.right')
+      this.left = document.querySelector('.left')
+      this.rightContent = document.querySelector('.right-content')
+      this.ind = 0;
+      this.init()
+    }
+    LuckCoffee.prototype = {
+      init: function () {
+        this.getAjax()
+        this.myBsFn()
+      },
+      myBsFn: function () {
+        this.bs = new BScroll('.right', {
+          click: true,
+          probeType: 3 // 
+        })
+
+      },
+      getAjax: function () {
+        ajax('./mock/luckCoffee.json', (res) => {
+          console.log(res, 'res')
+          this.render(res.floor.left, 'left')
+          this.render(res.floor.right, 'right')
+        })
+      },
+      render: function (data, dir) {
+
+        if (dir === 'left') {
+          this.left.innerHTML = data.map(item => {
+            return `<li class="left-item">${item}<li>`
+          }).join('')
+        } else if (dir === 'right') {
+          var str = '';
+          data.forEach(item => {
+            if (item.type === 'tab1') {
+              str += `<h1 class="right-item">${item.type}</h1>`;
+              item.content.forEach(val => {
+                str += `<li>${val.city}</li>`
+              })
+            } else if (item.type === 'tab2') {
+              str += `<h1 class="right-item">${item.type}</h1>`;
+              item.content.forEach(val => {
+                str += `<li>${val.city}</li>`
+              })
+            } else if (item.type === 'tab3') {
+              str += `<h1 class="right-item">${item.type}</h1>`;
+              item.content.forEach(val => {
+                str += `<li>${val.city}</li>`
+              })
+            }
+            this.rightContent.innerHTML = str;
+          })
+        }
+        this.rightItem = document.querySelectorAll('.right-item')
+        this.leftItem = document.querySelectorAll('.left-item')
+        this.bindFloor()
+      },
+      // 绑定楼层事件
+      bindFloor: function () {
+        this.bs.on('scroll', () => {
+          // console.log(rightItem[0].getBoundingClientRect().top )
+          this.rightItem.forEach((item, index) => {
+            if (item.getBoundingClientRect().top <= 90) {
+              this.ind = index;
+              console.log(this.ind, 'ind')
+            }
+          })
+          this.leftItem.forEach(item => {
+            for (var i = 0; i < this.leftItem.length; i++) {
+              this.leftItem[i].classList.remove('active')
+            }
+            this.leftItem[this.ind].classList.add('active')
+          })
+        })
+
+      }
+    }
+
+    new LuckCoffee()
+
+
+
+
+
+
+
+
+
+    // 判断每一个标题是否走到了顶部， 如果走到就给左边加类
+    // right.addEventListener('scroll', function() {
+    //   // console.log(rightItem[0].getBoundingClientRect().top )
+    //   rightItem.forEach((item, index) => {
+    //      if(item.getBoundingClientRect().top <= 90) {
+    //        console.log(index)
+    //        ind  = index;
+    //      }
+    //   })
+
+    //   leftItem.forEach(item => {
+    //     for(var i = 0; i < leftItem.length; i++) {
+    //       leftItem[i].classList.remove('active')
+    //     }
+    //     leftItem[ind].classList.add('active')
+    //   })
+    // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var myBs = new BScroll('.right', {
+    //   click: true,
+    //   probeType: 3
+    // })
+
+    // getAjax()
+    // function getAjax() {
+    //   ajax('./mock/data.json', (res) => {
+    //     render(res.floor.left, 'left')
+    //     render(res.floor.right, 'right')
+    //   })
+    // }
+
+    // function render(data, dir) {
+    //   if (dir === 'left') {
+
+    //     left.innerHTML = data.map(item => {
+    //       return `<li class="left-item">${item}</li>`
+    //     }).join('')
+
+    //   } else if (dir === 'right') {
+
+    //     var str = '';
+    //     data.forEach(item => {
+    //       if (item.type == 'tab1') {
+    //         renderStr(item)
+    //       } else if (item.type === 'tab2') {
+    //         renderStr(item)
+    //       } else if (item.type === 'tab3') {
+    //         renderStr(item)
+    //       }
+    //       rightContent.innerHTML = str;
+    //     })
+    //   }
+
+    //   function renderStr(item) {
+    //     str += `<h1 class='right-item'> ${item.type} </h1>`
+    //     item.content.forEach(val => {
+    //       str += `<li> ${val.city} </li>`
+    //     })
+    //   }
+
+    //   var leftItem = document.querySelectorAll('.left-item')
+    //   var rightItem = document.querySelectorAll('.right-item')
+
+    //   myBs.on('scroll', function (pos) {
+    //     rightItem.forEach((item, index) => {
+    //       if (item.getBoundingClientRect().top <= 180) {
+    //         ind = index
+    //       }
+    //     })
+    //     leftItem.forEach(item => {
+    //       for (var i = 0; i < leftItem.length; i++) {
+    //         leftItem[i].classList.remove('active')
+    //       }
+    //       leftItem[ind].classList.add('active')
+    //     })
+    //   })
+    // }
+
+
+
+
+
+
+
+
+    // // 如果右边的每一个item 滚动到顶部的话，让左边对应的item 加一个active
+    // right.addEventListener('scroll', function () {
+    //   rightItem.forEach((item, index) => {
+
+    //     if (item.getBoundingClientRect().top <= 90) {
+    //       console.log(index, 'index')
+    //       ind = index
+    //     }
+    //   })
+
+    //   leftItem.forEach(item => {
+    //     for (var i = 0; i < leftItem.length; i++) {
+    //       leftItem[i].classList.remove('active')
+    //     }
+    //     leftItem[ind].classList.add('active')
+    //   })
+    // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

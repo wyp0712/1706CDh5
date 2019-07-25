@@ -1,0 +1,136 @@
+@import './reset.scss';
+
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.footer {
+  width: 100%;
+  height: rem(45px);
+  background: red;
+}
+
+.nav {
+  width: 100%;
+  height: rem(45px);
+  background: lightblue;
+}
+
+
+
+
+.main {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow: auto;
+}
+
+
+.active {
+  color: red;
+}
+
+.content {
+  width: 100%;
+  // swiper
+  .swiper-container {
+    width: 100%;
+    height: rem(150px);
+    background: lightblue;
+
+    .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+
+      .swiper-slide {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .nav {
+    width: 100%;
+    height: rem(40px);
+    background: lightcyan;
+    position: sticky;
+    left: 0;
+    top: 0;
+  }
+  // better-scroll
+  .bs-container {
+    width: 100%;
+    height: rem(800px);
+    display: flex;
+    .left {
+      width: 20%;
+      overflow: auto;
+      border-right: 1px solid black;
+      li {
+        text-align: center;
+        line-height: rem(45px);
+        border-bottom: 1px dashed lightcoral;
+      }
+    }
+    .right {
+      // 可视
+      // flex: 8;
+      width: 80%;
+      text-align: center;
+      line-height: rem(35px);
+      overflow: hidden;
+      // float: right;
+      scroll-behavior: smooth;
+
+      .right-content {
+        li {
+          text-align: center;
+          line-height: rem(45px);
+          border-bottom: 1px dashed lightcoral;
+        }
+
+        .right-item {
+          text-align: left;
+          text-indent: 2em;
+          line-height: rem(45px);
+          border-bottom: 1px dashed lightcoral;
+        }
+      }
+    }
+  }
+}
+
+.swiper-container {
+  width: 100%;
+  height: rem(150px);
+  background: lightblue;
+
+  .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
