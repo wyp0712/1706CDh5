@@ -51,24 +51,41 @@
       width: 100%;
 
     }
+
     .swiper-box {
       width: 100%;
     }
+
     .swiper-container {
       width: 100%;
       height: 150px;
     }
+
     .swiper-container .swiper-wrapper {
       width: 100%;
       height: 150px;
     }
+
     .swiper-container .swiper-wrapper .swiper-slide {
       width: 100%;
       height: 150px;
     }
-    .swiper-container .swiper-wrapper .swiper-slide img{
+
+    .swiper-container .swiper-wrapper .swiper-slide img {
       width: 100%;
       height: 150px;
+    }
+
+    .item {
+      width: 100%;
+      height: 120px;
+      position: relative;
+    }
+
+    .item .myCanvas {
+      position: absolute;
+      right: 3%;
+      top:2%;
     }
   </style>
 
@@ -81,9 +98,7 @@
   <div class="wrap">
     <header class="header"></header>
 
-  <div class="swiper-box">
-
-  </div>
+    <div class="swiper-box"></div>
 
     <nav class="nav">
       <span class="active">正在热映</span>
@@ -94,6 +109,7 @@
 
     </div>
   </div>
+
 
 
   <script src="../libs/swiper.js"></script>
@@ -109,9 +125,12 @@
     }
     myMovie.prototype = {
       init: function () {
-        this.getAjax()
+
+        this.getAjax(0)
+
         this.bindEvent()
       },
+
       getAjax: function (index) {
         ajax('./data.json', (res) => {
           console.log(res)
@@ -119,43 +138,73 @@
           this.render(res.swiper, 'swiper')
         })
       },
+
       render: function (data, dir, ind) {
         if (dir === 'swiper') {
 
-         this.swiperBox.innerHTML = `<div class="swiper-container">
+          this.swiperBox.innerHTML = `<div class="swiper-container">
           <div class="swiper-wrapper">
            ${data.map(item => {
-             return `<div class='swiper-slide'> <img src = ${item.img} > </div>`
-           }).join('')}
+            return `<div class='swiper-slide'> <img src = ${item.img}> </div>`
+          }).join('')}
           </div>
         </div>`;
+
         } else if (dir === 'movie') {
           this.content.innerHTML = data.map(item => {
             if (ind == 0 && item.globalReleased) {
-              console.log('0')
-              return `<div>${item.nm}</div>`
-            } else if (ind == 1 && item.globalReleased == false) {
-              console.log('1')
-              return `<div>${item.nm}</div>`
+              // console.log('0')
+
+              return `<div class=item>${item.nm}  <canvas class=myCanvas width='100' height='100' data-sc=${item.sc}></canvas> </div> `
+            } else if (ind == 1 && !item.globalReleased) {
+              // console.log('1')
+              return `<div class=item>${item.nm} <canvas class=myCanvas width='100' height='100' data-sc=${item.sc}></canvas> </div> `
             }
           }).join('')
         }
+
+        this.myGrade()
+        // 实例化swiper
         this.mySwiper()
       },
+      myGrade: function () {
+        this.myCanvas = document.querySelectorAll('.myCanvas')
+        console.log(this.myCanvas, 'canvas')
+        this.myCanvas.forEach(item => {
+          this.api = item.getContext('2d');
+          var sc = item.dataset.sc;
+          console.log(sc / 10, 'sc')
+          var deg = sc / 10 * 360 * Math.PI / 180;
+          createText(this.api, sc, item.width / 2, item.height / 2);
+          this.api.beginPath();
+          this.api.arc(item.width / 2, item.height / 2, 20, 0, deg);
+       
+          this.api.strokeStyle = 'red'
+          this.api.lineWidth = 10
+          this.api.stroke()
+        })
+
+
+        function createText(api, text, x, y) {
+           api.beginPath()
+           api.font='12px sans-serif';
+           api.textAlign='center';
+          //  'top | hanging | middle | alphabetic | ideographic | bottom';
+           api.textBaseline= 'middle'
+           api.fillText(text, x, y)
+        }
+      },
       mySwiper: function () {
-         new Swiper('.swiper-container', {})
+        new Swiper('.swiper-container', {})
       },
       myBscroll: function () { },
       bindEvent: function () {
         this.navSpans.forEach((item, index) => {
           item.onclick = () => {
-            // item.classList.remove('active')
             for (var i = 0; i < this.navSpans.length; i++) {
               this.navSpans[i].classList.remove('active')
             }
             item.classList.add('active')
-            // this.navSpans[index].classList.add('active')
-            // console.log(index)
             this.getAjax(index)
           }
         })
