@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <canvas id="myCanvas" style="border:1px solid black" width="500" height="500"></canvas>
+
+
+
+  <script>
+
+
+    var myCanvas = document.querySelector('#myCanvas');
+    var api = myCanvas.getContext('2d');
+
+
+    // 坐标系
+    api.translate(50, 450);
+    api.moveTo(0, 0);
+    api.lineTo(0, -400)
+    api.moveTo(0, 0);
+    api.lineTo(400, 0)
+    api.stroke()
+
+
+    for (var i = 0; i < 5; i++) {
+      api.save()
+      api.beginPath()
+      api.moveTo(i * 100, 0)
+      api.lineTo(i * 100, -400)
+      api.font = '10px sans-serif';
+      api.textAlign = 'center';
+      api.textBaseline = 'top';
+      api.fillText(i * 100, i * 100, 0)
+      api.strokeStyle = '#eee'
+      api.stroke()
+
+
+      api.beginPath()
+      api.moveTo(0, - i * 100)
+      api.lineTo(400, - i * 100)
+      api.strokeStyle = '#eee'
+      api.stroke()
+      api.restore();
+      
+    }
+
+
+    function rendom(max, min) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    // [ [x, y], [x1, y1], [x2,y2] ]
+    function getData(span, num) {
+      var arr = []
+      for (var i = 0; i < num; i++) {
+        arr.push([i * span, -rendom(100, 90)])
+      }
+      return arr;
+    }
+    console.log(getData(50, 5))
+    let list = getData(50, 8)
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && list[i + 1]) {
+        api.save()
+        api.beginPath()
+        api.moveTo(list[i][0], list[i][1])
+        api.lineTo(list[i + 1][0], list[i + 1][1])
+        api.arc(list[i + 1][0], list[i + 1][1], 2, 0, Math.PI *2)
+        api.fill()
+        // api.lineWidth = 20;
+        api.stroke()
+        api.restore()
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

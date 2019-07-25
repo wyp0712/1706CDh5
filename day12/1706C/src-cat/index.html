@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./libs/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <div class="wrap">
+    <header class="header">
+      猫眼电影
+    </header>
+    <nav class="nav">
+      <!-- <span>北京</span> -->
+      <span>正在热映</span>
+      <span>即将上映</span>
+      <!-- <span></span> -->
+    </nav>
+    <main class="main">
+      <div class="content">
+        <div class="item">
+          <div class="left">
+            <img src="https://p0.meituan.net/128.180/movie/bb9f75599bfbb2c4cf77ad9abae1b95c1376927.jpg" alt="">
+          </div>
+          <div class="mid">
+            <h2>银河补习班</h2>
+            <p>观众品分</p>
+            <p>主演</p>
+            <p>影院</p>
+          </div>
+          <div class="right">
+            <span>购票</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="dialog hide">
+      <div class="mask"></div>
+    </div>
+
+    <footer class="footer"></footer>
+  </div>
+
+
+  <script src="./libs/ajax.js"></script>
+  <script>
+
+
+    var MyCat = function (opt) {
+
+      var defaults = {
+
+      }
+
+      this.opts = Object.assign({}, defaults, opt)
+      this.contentEl = document.querySelector(this.opts.contentEl)
+      this.mainEl = document.querySelector(this.opts.mainEl)
+      this.wrap = document.querySelector('.wrap')
+      this.movieData = []
+
+      this.init()
+    }
+
+    MyCat.prototype = {
+
+      init: function () {
+        this.getData()
+
+      },
+      render: function () {
+        this.contentEl.innerHTML += this.movieData.map(item => {
+          return `<div class="item">
+          <div class="left">
+            <img src="${item.img}" alt="">
+          </div>
+          <div class="mid">
+            <h2>${item.nm}</h2>
+            <p>${item.sc}</p>
+            <p>${item.star}</p>
+            <p>${item.showInfo}</p>
+          </div>
+          <div class="right">
+            <span>${item.globalReleased ? "购票" : "观众想看"}</span>
+          </div>
+        </div>`
+        }).join('')
+        this.scrollEvent()
+      },
+      getData: function () {
+        ajax('./mock/data.json', (res) => {
+          console.log(res.movieList, 'movieList')
+          this.movieData = res.movieList
+          this.render()
+        })
+      },
+      scrollEvent: function () {
+        var loading = `<div class="dialog"><div class="mask"></div></div> `
+        var that = this;
+        // 内容高度 - 可视区高度 - 滚动条高度 == 0 如果等于0说明当前内容已经加载完毕，需要再请求数据
+        this.mainEl.addEventListener('scroll', scrollFn)
+        function scrollFn(e) {
+          var contentH = that.contentEl.offsetHeight;
+          var winH = this.offsetHeight;
+          var scrollH = this.scrollTop;
+          console.log(contentH - winH - scrollH);
+          if (contentH - winH - scrollH === 0) {
+            that.mainEl.removeEventListener('scroll', scrollFn)
+            var dialogDom = document.querySelector('.dialog')
+            dialogDom.classList.add('show');
+            setTimeout(function () {
+              dialogDom.classList.remove('show');
+              that.getData()
+            }, 1000)
+          }
+        }
+      }
+    }
+
+    new MyCat({
+      contentEl: '.content',
+      mainEl: '.main'
+    })
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

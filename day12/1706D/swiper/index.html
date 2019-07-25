@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="./libs/swiper.css">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 150px;
+    }
+
+    .swiper-container .swiper-wrapper {
+      width: 100%;
+      height: 150px;
+    }
+
+    .swiper-container .swiper-wrapper .swiper-slide {
+      width: 100%;
+      height: 150px;
+    }
+
+    img {
+      width: 100%;
+      height: 150px;
+    }
+
+    .nav {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      position: relative;
+    }
+
+    .nav span {
+      flex: 1;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .bottom {
+      width: 33.3%;
+      height: 3px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transition: all 0.5s;
+    }
+
+    .bottom::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+    <div class="nav">
+      <span>tab1</span>
+      <span>tab2</span>
+      <span>tab3</span>
+      <div class="bottom"></div>
+    </div>
+
+  </div>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="../../../img/banner.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img src="../../../img/banner2.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <img src="../../../img/banner.jpg" alt="">
+      </div>
+    </div>
+
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <script src="./libs/swiper.js"></script>
+  <script>
+
+    var spans = document.querySelectorAll('.nav span')
+    var bottom = document.querySelector('.bottom')
+
+
+    var mySwiper = new Swiper('.swiper-container', {
+      //  autoplay:true,
+      // loop: true,  // 循环轮播
+      // direction: 'vertical', // 轮播方向
+
+      // effect: 'cube', // cube
+      slidesPerView: 3,
+      centeredSlides: true,
+
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets', // fraction  progressbar  custom  bullets
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // swiper方法：
+
+
+      on: {
+        // 找下标；
+        slideChange: function () {
+          console.log(this.activeIndex)
+          spans.forEach((item, index) => {
+            bottom.style.left = `${this.activeIndex * 125}px`
+          })
+        }
+      }
+    })
+
+
+    spans.forEach((item, index) => {
+      item.onclick = function() {
+        bottom.style.left = `${index * 125}px`
+        console.log(index * -375, 'this.activeIndex * -375')
+        mySwiper.setTransition(1000);
+        mySwiper.setTranslate(`${index * -375}`)
+      }
+    })
+
+
+
+
+  </script>
+
+</body>
+
+</html>
