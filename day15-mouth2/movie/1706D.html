@@ -15,6 +15,7 @@
 
 
   <div class="wrap">
+
     <header class="header">
       <a href="./city.html" class="cityA">北京</a>
     </header>
@@ -23,7 +24,7 @@
 
       <div class="swiper-box"></div>
 
-      <nav class="nav" data-index="0">
+      <nav class="nav">
         <span class="active">正在热映</span>
         <span>即将上映</span>
       </nav>
@@ -49,42 +50,42 @@
     var myMovie = function () {
       this.navSpans = document.querySelectorAll('.nav span')
       this.main = document.querySelector('.main')
-      this.nav = document.querySelector('.nav')
       this.content = document.querySelector('.content')
+      this.cityA = document.querySelector('.cityA');
       this.swiperBox = document.querySelector('.swiper-box')
-      this.cityA = document.querySelector('.cityA')
-      this.stroge = window.localStorage;
+
+      this.stroage = window.localStorage;
+
+
 
       this.init()
     }
     myMovie.prototype = {
       init: function () {
 
-        // 刚进入页面请求数据
         this.getAjax((res) => {
-          //  请求数据后渲染两个数据  swiper  movie
+          // swiper
           this.render(res.swiper, 'swiper')
+          // movie
           this.render(res.movieArr, 'movie', 0)
+
         })
 
-        // 调用tab切换
         this.bindEvent()
-        // 本地存储
         this.stroageFn()
-        // 上拉下拉
         this.myBscroll()
+
       },
       stroageFn: function () {
-        if (this.stroge.city) {
-          this.cityA.innerHTML = this.stroge.city;
+        if (this.stroage.city) {
+          this.cityA.innerHTML = this.stroage.city;
         }
       },
-      getAjax: function (fn) { // fn 是一个形式参数 用来接回调函数 // 传入回调函数用来执行每个函数中的 内部行为
+      getAjax: function (fn) {
         ajax('./data.json', (res) => {
-          fn && fn(res) // 实际参数
+          fn && fn(res)
         })
       },
-      // tab切换
       bindEvent: function () {
         this.navSpans.forEach((item, index) => {
           item.onclick = () => {
@@ -92,19 +93,16 @@
               this.navSpans[i].classList.remove('active');
             }
             item.classList.add('active');
-            // 点击切换自定义属性data-index
-            item.parentNode.dataset.index = index;
-            // 请求数据
-            this.getAjax((res) => { // 形式参数，用来接数据的；
-              // 拿到数据并且渲染
+            this.getAjax((res) => {
+              console.log(index, ' index')
               this.render(res.movieArr, 'movie', index)
             })
           }
         })
       },
       render: function (data, dir, index) {
-
-        if (dir == 'swiper') { // 
+        console.log(dir, index, '-----------1')
+        if (dir == 'swiper') {
           this.swiperBox.innerHTML = `<div class="swiper-container">
             <div class="swiper-wrapper">
                ${ data.map(item => {
@@ -112,97 +110,101 @@
           }).join('')}
             </div>
           </div>`;
-
-        } else if (dir === 'movie') { // 
+        } else if (dir === 'movie') {
+          // console.log('movie')
           this.content.innerHTML = data.map(item => {
-            if (item.globalReleased && index == 0) {
-              return `<div class=item> ${item.nm} <canvas class=myCanvas width= "100" height= "100" data-sc = ${item.sc}></canvas>  </div>`
+            if (item.globalReleased && index === 0) {
+              return `<div class=item> ${item.nm} <canvas class="myCanvas" width='100' height="100" data-sc=${item.sc} data-index=0></canvas> </div>`
             } else if (!item.globalReleased && index == 1) {
-              return `<div class=item> ${item.nm} <canvas class=myCanvas width= "100" height= "100" data-sc = ${item.sc}></canvas>  </div>`
+              return `<div class=item> ${item.nm}  <canvas class="myCanvas" width='100' height="100" data-sc=${item.sc} data-index=0></canvas> </div>`
             }
-          }).join('')
+          }).join('');
         }
 
         this.mySwiper()
         this.myGrade()
-
       },
       // canvas评分区域
       myGrade: function () {
+        var that = this;
+        grade()
+        function grade() {
 
-        this.myCanvas = document.querySelectorAll('.myCanvas');
-        // 循环画布
-        this.myCanvas.forEach(item => {
-          // 得到每一个画布控制权
-          this.api = item.getContext('2d');
-          var sc = item.dataset.sc; // 获取评分
+          this.myCanvas = document.querySelectorAll('.myCanvas');
+          // var j = 0;
+          this.myCanvas.forEach(item => {
 
-          var deg = (sc / 10 * 360 - 90) * Math.PI / 180;
-          createText(this.api, sc, item.width / 2, item.height / 2);
+            var per = Math.PI / 180;
+            var indexDeg = item.dataset.index;
+            // indexDeg++;
 
-          this.api.beginPath();
-          this.api.arc(item.width / 2, item.height / 2, 38, 0, Math.PI * 2)
-          this.api.lineWidth = 10;
-          this.api.strokeStyle = '#eee';
-          this.api.stroke()
-          this.api.closePath();
+            // console.log(indexDeg, 'indexDeg')
 
+            this.api = item.getContext('2d');
+            // 获取评分
+            var sc = item.dataset.sc;
+            // 转成百分比 然后 * 360 * 1弧度（Math.PI / 180）;
+            var deg = sc / 10 * 360 * Math.PI / 180;
+            // 给小圆圈中心加字
+            this.api.beginPath();
 
-          this.api.beginPath();
-          this.api.arc(item.width / 2, item.height / 2, 38, -90 * Math.PI / 180, deg, false);
-          this.api.lineWidth = 10;
-          this.api.strokeStyle = 'red';
-          this.api.stroke();
-          this.api.closePath();
-        })
-        //
-        function createText(api, text, x, y) {
-          api.beginPath();
-          api.font = '24px sans-serif';
-          api.textAlign = 'center';
-          api.textBaseline = 'middle';
-          if (text == 0) {
-            api.fillText('暂无评分', x, y)
-          } else {
-            api.fillText(text, x, y)
-          }
+            that.createText(this.api, sc, item.width / 2, item.height / 2);
+            this.api.arc(item.width / 2, item.height / 2, 40, 0, deg);
+            this.api.lineWidth = 15;
+            this.api.strokeStyle = 'red';
+            this.api.stroke()
+          })
+
+          // requestAnimationFrame(grade)
         }
+
+        // requestAnimationFrame(grade)
       },
-      // swiper
+      createText: function (api, text, x, y) {
+        api.font = '20px sans-serif';
+        api.textAlign = 'center';
+        api.textBaseline = 'middle';
+        if (text == 0) {
+          api.fillText('暂无评分', x, y)
+        } else {
+          api.fillText(text, x, y)
+        }
+
+      },
       mySwiper: function () {
         new Swiper('.swiper-container')
       },
-
       myBscroll: function () {
         this.bs = new BScroll('.main', {
           click: true,
+          // probeType: 2,
           pullDownRefresh: {
             threshold: 180,
             stop: 80
           },
           pullUpLoad: {
-            threshold: -100,
+            threshold: -80,
           }
         })
         this.pullDown()
       },
       pullDown: function () {
         this.bs.on('pullingDown', () => {
-          var ind = this.nav.dataset.index;
-          console.log(ind)
           this.content.dataset.top = '正在刷新'
-          // 请求数据  
           this.getAjax((res) => {
             setTimeout(() => {
-              this.content.dataset.top = '刷新成功✅';
-              this.render(res.movieArr, 'movie', ind)
-              setTimeout(() => {
-                this.content.dataset.top = '下拉刷新';
+              this.content.dataset.top = '刷新成功✅'
+              this.render(res.movieArr, 'movie', 0)
+              setTimeout( () => {
+                this.content.dataset.top = '下拉刷新'
                 this.bs.finishPullDown()
                 this.bs.refresh()
               }, 1000)
+
+
             }, 2000)
           })
+
         })
       },
       pullUp: function () {
