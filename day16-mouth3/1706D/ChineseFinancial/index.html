@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="./scss/index.css">
+  <script src="./libs/flexible.js"></script>
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="wrap">
+
+    <header class="header"></header>
+
+    <main class="main">
+      <div class="content">
+        <div class="sec">tab1</div>
+        <div class="sec">2</div>
+        <div class="sec">3</div>
+        <div class="sec"></div>
+        <div class="sec">4</div>
+        <div class="sec">5</div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <ul class="item">
+        <li class="iconfont icon-27"></li>
+        <li>购物车</li>
+      </ul>
+      <ul class="item">
+        <li class="iconfont icon-27"></li>
+        <li>购物车</li>
+      </ul>
+      <ul class="item">
+        <li class="iconfont icon-27"></li>
+        <li>购物车</li>
+      </ul>
+      <ul class="item">
+        <li class="iconfont icon-27"></li>
+        <li>购物车</li>
+      </ul>
+    </footer>
+  </div>
+
+
+  <script src="./libs/ajax.js"></script>
+  <script src="./libs/bscroll.js"></script>
+
+  <script>
+
+
+    var ChineseFinancial = function () {
+
+      this.content = document.querySelector('.content')
+      this.init()
+    }
+
+    ChineseFinancial.prototype = {
+      init: function () {
+        // 刚进入页面就渲染数据
+        this.getAjax((res) => {
+          this.render(res.movieArr, 'top')
+        })
+        this.myBscroll()
+      },
+      getAjax: function (fn) {
+        ajax('./data.json', (res) => {
+          fn && fn(res)
+        })
+      },
+      // 渲染函数
+      render: function (data, dir) {
+        // console.log(data, dir, 'dir-------------1')
+        var list = data.map(item => {
+          return `<div class=sec>${item.nm}</div>`
+        }).join('');
+
+        if (dir === 'top') {
+          this.content.innerHTML = list;
+        } else if (dir === 'bottom') {
+          this.content.innerHTML += list;
+        }
+      },
+      myBscroll: function () {
+        /*
+          1. 先开启probeType : 2
+          2. 监听scroll事件
+          3. 下拉刷新  pos.y > 120 && flag  
+          4. 上拉加载  
+        */
+        var myBS = new BScroll('.main', {
+          click: true,
+          probeType: 2, // 
+        })
+        var flag = true;
+        myBS.on('scroll', (pos) => {
+          // 下拉刷新
+          if (pos.y >= 120 && flag) {
+            flag = false;
+
+            this.getAjax((res) => {
+              setTimeout(() => {
+                console.log(res, 'res')
+                this.render(res.movieArr, 'top')
+                // myBS.refresh()
+              }, 2000)
+            })
+          }
+          // 上拉加载  滚动距离大于最大距离 再加一个开关
+          if ( Math.abs(pos.y) >= Math.abs(myBS.maxScrollY)+ 200  && flag) {
+            flag = false;
+          }
+        })
+        myBS.on('touchEnd', function() {
+          flag = true;
+
+        })
+
+      },
+
+    }
+
+    new ChineseFinancial()
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
