@@ -147,18 +147,13 @@
             var deg = sc / 10 * 360 * Math.PI / 180;
             // 给小圆圈中心加字
             this.api.beginPath();
-
             that.createText(this.api, sc, item.width / 2, item.height / 2);
             this.api.arc(item.width / 2, item.height / 2, 40, 0, deg);
             this.api.lineWidth = 15;
             this.api.strokeStyle = 'red';
             this.api.stroke()
           })
-
-          // requestAnimationFrame(grade)
         }
-
-        // requestAnimationFrame(grade)
       },
       createText: function (api, text, x, y) {
         api.font = '20px sans-serif';
@@ -190,9 +185,13 @@
       },
       pullDown: function () {
         this.bs.on('pullingDown', () => {
-          this.content.dataset.top = '正在刷新'
-          this.getAjax((res) => {
+          this.content.dataset.top = '正在刷新';
+
+
+          this.getAjax((res) => { // 
+
             setTimeout(() => {
+
               this.content.dataset.top = '刷新成功✅'
               this.render(res.movieArr, 'movie', 0)
               setTimeout( () => {

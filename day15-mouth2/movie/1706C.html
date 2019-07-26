@@ -193,6 +193,7 @@
           this.content.dataset.top = '正在刷新'
           // 请求数据  
           this.getAjax((res) => {
+
             setTimeout(() => {
               this.content.dataset.top = '刷新成功✅';
               this.render(res.movieArr, 'movie', ind)
@@ -201,6 +202,7 @@
                 this.bs.finishPullDown()
                 this.bs.refresh()
               }, 1000)
+              
             }, 2000)
           })
         })
