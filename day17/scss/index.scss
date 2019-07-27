@@ -1,0 +1,179 @@
+@import './reset.scss';
+
+
+@function rem($font) {
+  @return $font / 37.5px * 1rem;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: rem(16px);
+}
+
+.header {
+
+  width: 100%;
+  height: rem(45px);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: #000;
+  color: #fff;
+
+  .left {
+    @extend %juzhong;
+  }
+
+  .right {
+    @extend %juzhong;
+  }
+}
+
+.main {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content {
+  width: 100%;
+  background: #F8FCF7;
+}
+
+.swiper-box {
+  width: 100%;
+}
+
+// swiper
+.swiper-container {
+  width: 100%;
+  height: rem(120px);
+
+  .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// icon
+
+.icon-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem(5px) 0;
+
+  .item {
+    width: 20%;
+    height: rem(85px);
+
+    li {
+      @extend %juzhong;
+    }
+  }
+}
+
+
+// ad {
+
+.ad-box {
+  width: 100%;
+  height: rem(100px);
+  background: url('../img/ad.png') no-repeat;
+  background-size: 99% 65%;
+  background-position: center;
+}
+
+.active {
+  color: red;
+}
+
+// nav
+.nav {
+  width: 100%;
+  height: rem(35px);
+  display: flex;
+
+  span {
+    flex: 1;
+    @extend %juzhong;
+  }
+}
+
+.nav-content {
+  width: 100%;
+
+  .nav-item {
+    width: 100%;
+    height: rem(180px);
+    display: flex;
+    .left {
+      flex: 4;
+      padding: 2%;
+      @extend %juzhong;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .right {
+      flex: 6;
+      padding: 2%;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        text-align: left;
+        font-size: rem(20px);
+        line-height: rem(35px);
+      }
+
+      .time {
+        text-align: left;
+        font-size: rem(12px);
+        line-height: rem(35px);
+        color: #ccc;
+      }
+
+      .price {
+        text-align: left;
+        font-size: rem(20px);
+        color: red;
+        line-height: rem(55px);
+      }
+    }
+  }
+}
+
+
+
+
+.footer {
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  background: lightblue;
+
+  .item {
+    flex: 1;
+
+    li {
+      @extend %juzhong;
+    }
+  }
+}

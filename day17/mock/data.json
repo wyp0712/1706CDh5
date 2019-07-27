@@ -1,0 +1,278 @@
+{
+  "swiper": [
+    {
+      "img": "./img/banner.png"
+    },
+    {
+      "img": "./img/banner.png"
+    },
+    {
+      "img": "./img/banner.png"
+    }
+  ],
+  "icon": [
+    {
+      "img": "./img/icon1.png",
+      "name": "演唱会"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "话剧歌剧"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "休闲展览"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "亲子演出"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "戏曲艺术"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "音乐会"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "舞蹈芭蕾"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "开心麻花"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "景点/门票"
+    },
+    {
+      "img": "./img/icon1.png",
+      "name": "更多精彩"
+    }
+  ],
+  "ad": ["img/ad.png"],
+  "findFascinating": {
+    "top": ["img/splendid-img1.png", "img/splendid-img2.png"],
+    "bottom": [
+      {
+        "title": "鹿晗",
+        "tag": "北京演唱会",
+        "img": "img/icon1.png"
+      },
+      {
+        "title": "深夜食堂",
+        "tag": "授权演唱会",
+        "img": "img/icon2.png"
+      },
+      {
+        "title": "冰上迪斯尼",
+        "tag": "花样滑冰秀",
+        "img": "img/icon3.png"
+      }
+    ]
+  },
+  "hotStadium": [
+    {
+
+    }
+  ], 
+  "recommendedToyou": {
+    "tabList": ["当前热门","最新上架","折扣演出","全部时间"],
+    "listContent":[
+      {
+        "id": 1211270,
+        "haspromotionTag": false,
+        "img": "img/tab-img1.png",
+        "version": "v3d imax",
+        "nm": "哪吒之魔童降世",
+        "preShow": false,
+        "sc": 9.7,
+        "globalReleased": false,
+        "wish": 154678,
+        "star": "吕艳婷,囧森瑟夫,瀚墨",
+        "rt": "2019-07-26",
+        "showInfo": "2019-07-26 本周五上映",
+        "showst": 4,
+        "wishst": 0
+      },
+      {
+        "id": 1229534,
+        "haspromotionTag": false,
+        "img": "img/tab-img2.png",
+        "version": "v2d imax",
+        "nm": "银河补习班",
+        "preShow": false,
+        "sc": 9.5,
+        "globalReleased": true,
+        "wish": 221884,
+        "star": "邓超,白宇,任素汐",
+        "rt": "2019-07-18",
+        "showInfo": "今天221家影院放映2574场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 1189879,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/moviemachine/7b9b0725ab5feae642e1fbba9fbb90fe3702078.jpg",
+        "version": "v3d imax",
+        "nm": "狮子王",
+        "preShow": false,
+        "sc": 8.9,
+        "globalReleased": true,
+        "wish": 191819,
+        "star": "唐纳德·格洛弗,塞斯·罗根,詹姆斯·厄尔·琼斯",
+        "rt": "2019-07-12",
+        "showInfo": "今天217家影院放映2406场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 1226558,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/movie/1890a564c74d8865750bb1b19b9fc72a1935745.jpg",
+        "version": "",
+        "nm": "跳舞吧！大象",
+        "preShow": false,
+        "sc": 0,
+        "globalReleased": false,
+        "wish": 42289,
+        "star": "艾伦,金春花,彭杨",
+        "rt": "2019-07-26",
+        "showInfo": "2019-07-26 本周五上映",
+        "showst": 4,
+        "wishst": 0
+      },
+      {
+        "id": 1205779,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/movie/29d4b848f1835efaabfa8ee39c959b731433302.jpg",
+        "version": "",
+        "nm": "回到过去拥抱你",
+        "preShow": false,
+        "sc": 0,
+        "globalReleased": false,
+        "wish": 87889,
+        "star": "侯明昊,彭昱畅,盖玥希",
+        "rt": "2019-07-26",
+        "showInfo": "2019-07-26 本周五上映",
+        "showst": 4,
+        "wishst": 0
+      },
+      {
+        "id": 1218141,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/movie/8d3efdc44af04c3254fc9e4ad5334ae32660685.jpg",
+        "version": "",
+        "nm": "扫毒2天地对决",
+        "preShow": false,
+        "sc": 9,
+        "globalReleased": true,
+        "wish": 320805,
+        "star": "刘德华,古天乐,苗侨伟",
+        "rt": "2019-07-05",
+        "showInfo": "今天205家影院放映1045场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 1243361,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/movie/f75fcb7696d55452e32794b2219700b9840805.jpg",
+        "version": "v2d imax",
+        "nm": "烈火英雄",
+        "preShow": true,
+        "sc": 0,
+        "globalReleased": false,
+        "wish": 70651,
+        "star": "黄晓明,杜江,谭卓",
+        "rt": "2019-08-01",
+        "showInfo": "2019-08-01 下周四上映",
+        "showst": 4,
+        "wishst": 0
+      },
+      {
+        "id": 1198925,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/moviemachine/5dac476535359b7bb951ff15d37a9d0b153821.jpg",
+        "version": "v3d imax",
+        "nm": "蜘蛛侠：英雄远征",
+        "preShow": false,
+        "sc": 9,
+        "globalReleased": true,
+        "wish": 502087,
+        "star": "汤姆·赫兰德,杰克·吉伦哈尔,塞缪尔·杰克逊",
+        "rt": "2019-06-28",
+        "showInfo": "今天174家影院放映629场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 644501,
+        "haspromotionTag": false,
+        "img": "http://p1.meituan.net/128.180/movie/ba8505305c58c36498c964196507a3363431364.jpg",
+        "version": "",
+        "nm": "隧道尽头",
+        "preShow": false,
+        "sc": 0,
+        "globalReleased": false,
+        "wish": 7764,
+        "star": "莱昂纳多·斯巴拉格利亚,克拉拉·拉戈,Uma Salduende",
+        "rt": "2019-07-25",
+        "showInfo": "今天190家影院放映426场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 1240752,
+        "haspromotionTag": false,
+        "img": "http://p1.meituan.net/128.180/moviemachine/0e52c4bb21353806f954c626bdf9a20d1844818.jpg",
+        "version": "",
+        "nm": "小Q",
+        "preShow": false,
+        "sc": 0,
+        "globalReleased": false,
+        "wish": 51107,
+        "star": "任达华,梁咏琪,罗仲谦",
+        "rt": "2019-09-20",
+        "showInfo": "今天152家影院放映406场",
+        "showst": 4,
+        "wishst": 0
+      },
+      {
+        "id": 1211345,
+        "haspromotionTag": false,
+        "img": "http://p0.meituan.net/128.180/moviemachine/350582b51ae828c837ec00bf8aac2a30548615.jpg",
+        "version": "v3d",
+        "nm": "爱宠大机密2",
+        "preShow": false,
+        "sc": 9,
+        "globalReleased": true,
+        "wish": 104515,
+        "star": "帕顿·奥斯瓦尔特,冯绍峰,凯文·哈特",
+        "rt": "2019-07-05",
+        "showInfo": "今天151家影院放映393场",
+        "showst": 3,
+        "wishst": 0
+      },
+      {
+        "id": 1229894,
+        "haspromotionTag": false,
+        "img": "http://p1.meituan.net/128.180/movie/6d4a99c589994b6959f71a6c3d8c9cc09531829.jpg",
+        "version": "",
+        "nm": "灰猴",
+        "preShow": false,
+        "sc": 7.4,
+        "globalReleased": true,
+        "wish": 4248,
+        "star": "王大治,高峰,王靖云",
+        "rt": "2019-07-23",
+        "showInfo": "今天97家影院放映231场",
+        "showst": 3,
+        "wishst": 0
+      }
+    ]
+  }
+}

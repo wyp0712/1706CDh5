@@ -77,13 +77,8 @@
     flex:1;
     @extend %juzhong;
     flex-direction: column;
-    li {
-      &:nth-child(1) {
-
-      }
-      &:nth-child(2) {
-        
-      }
+    .iconfont {
+      font-size: rem(18px);
     }
   }
 }

@@ -28,6 +28,8 @@
         <div class="sec">4</div>
         <div class="sec">5</div>
       </div>
+      <div class="tip">正在刷新</div>
+      <div class="bottom">正在加载</div>
     </main>
 
     <footer class="footer">
@@ -58,8 +60,9 @@
 
 
     var ChineseFinancial = function () {
-
       this.content = document.querySelector('.content')
+      this.tip = document.querySelector('.tip');
+      this.bottom = document.querySelector('.bottom');
       this.init()
     }
 
@@ -88,6 +91,7 @@
         } else if (dir === 'bottom') {
           this.content.innerHTML += list;
         }
+        this.myBS.refresh()
       },
       myBscroll: function () {
         /*
@@ -96,34 +100,51 @@
           3. 下拉刷新  pos.y > 120 && flag  
           4. 上拉加载  
         */
-        var myBS = new BScroll('.main', {
+        this.myBS = new BScroll('.main', {
           click: true,
           probeType: 2, // 
         })
         var flag = true;
-        myBS.on('scroll', (pos) => {
+        this.myBS.on('scroll', (pos) => {
           // 下拉刷新
           if (pos.y >= 120 && flag) {
-            flag = false;
-
+            flag = false; // 
             this.getAjax((res) => {
+              this.tip.classList.add('show');
               setTimeout(() => {
+                this.tip.innerHTML = `已经为您刷新了${res.movieArr.length}条数据`
                 console.log(res, 'res')
                 this.render(res.movieArr, 'top')
-                // myBS.refresh()
+                this.myBS.refresh()
+                setTimeout(() => {
+                  this.tip.innerHTML = '正在刷新'
+                  this.tip.classList.remove('show')
+                }, 1000) 
               }, 2000)
             })
           }
           // 上拉加载  滚动距离大于最大距离 再加一个开关
-          if ( Math.abs(pos.y) >= Math.abs(myBS.maxScrollY)+ 200  && flag) {
+          if (Math.abs(pos.y) >= Math.abs(this.myBS.maxScrollY) + 200 && flag) {
             flag = false;
+            this.getAjax((res) => {
+              this.bottom.classList.add('show');
+              setTimeout(() => {
+                this.bottom.innerHTML = `已经为您刷新了${res.movieArr.length}条数据`
+                console.log(res, 'res')
+                this.render(res.movieArr, 'bottom')
+                this.myBS.refresh()
+                setTimeout(() => {
+                  this.bottom.innerHTML = '正在加载'
+                  this.bottom.classList.remove('show')
+                }, 1000) 
+              }, 2000)
+            })
           }
         })
-        myBS.on('touchEnd', function() {
+        this.myBS.on('touchEnd', function () {
           flag = true;
 
         })
-
       },
 
     }
